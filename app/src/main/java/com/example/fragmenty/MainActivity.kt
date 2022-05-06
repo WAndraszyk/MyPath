@@ -2,7 +2,6 @@ package com.example.fragmenty
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onShowDetail() {
+    private fun onShowDetail() {
         val intent = Intent(this, DetailActivity::class.java)
         startActivity(intent)
     }
