@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Fragmenty</string>
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail_button">Pokaż przepis</string>
 </resources>
