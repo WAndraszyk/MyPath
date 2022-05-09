@@ -5,12 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 class RouteDetailFragment : Fragment() {
+    private var routeId = 0
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_route_detail, container, false)
     }
 
+    fun setRoute(id: Int){
+        routeId = id
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val title = requireView().findViewById<TextView>(R.id.textTitle)
+        val route = Route().routes[routeId]
+        title.text = route.getName()
+        val description = requireView().findViewById<TextView>(R.id.textDescription)
+        description.text = route.getWay()
+    }
 }
