@@ -10,8 +10,9 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         supportActionBar?.hide()
 
+        val id: Int = intent.getIntExtra("routeId", 0)
         val frag: RouteDetailFragment =
             supportFragmentManager.findFragmentById(R.id.detail_frag) as RouteDetailFragment
-        frag.setRoute(1)
+        frag.setRoute(id)
     }
 }

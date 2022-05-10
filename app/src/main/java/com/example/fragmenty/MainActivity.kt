@@ -2,7 +2,9 @@ package com.example.fragmenty
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -12,10 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-    }
 
-    private fun onShowDetail() {
-        val intent = Intent(this, DetailActivity::class.java)
-        startActivity(intent)
     }
 }

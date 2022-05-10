@@ -23,7 +23,13 @@ class RouteDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val title = requireView().findViewById<TextView>(R.id.textTitle)
-        val route = Route().routes[routeId]
+
+        val routes = arrayListOf<Route>(
+            Route("Trasa1", "Szczegóły trasy 1"),
+            Route("Trasa2", "Szczegóły trasy 2")
+        )
+
+        val route = routes[routeId]
         title.text = route.getName()
         val description = requireView().findViewById<TextView>(R.id.textDescription)
         description.text = route.getWay()
