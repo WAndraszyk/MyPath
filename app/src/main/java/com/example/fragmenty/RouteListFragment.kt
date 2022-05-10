@@ -13,10 +13,9 @@ class RouteListFragment : Fragment(R.layout.fragment_route_list) {
         val namesListView = view.findViewById(R.id.name_list) as ListView
         val names = mutableListOf<String>()
 
-        val routes = arrayListOf(
-            Route("Trasa1", "Szczegóły trasy 1"),
-            Route("Trasa2", "Szczegóły trasy 2")
-        )
+        val db = DBHelper(requireContext())
+
+        val routes = db.loadRoutes()
 
         for (i in routes) {
             names.add(i.getName())
@@ -26,7 +25,7 @@ class RouteListFragment : Fragment(R.layout.fragment_route_list) {
             requireContext(), android.R.layout.simple_list_item_1, names)
         namesListView.adapter = adapter
         namesListView.setOnItemClickListener { parent, _, position, _ ->
-            val element = parent.getItemAtPosition(position) // The item that was clicked
+            parent.getItemAtPosition(position) // The item that was clicked
             val intent = Intent(requireContext(), DetailActivity()::class.java)
             intent.putExtra("routeId", position)
             startActivity(intent)

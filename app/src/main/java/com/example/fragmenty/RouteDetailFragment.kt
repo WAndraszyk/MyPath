@@ -23,11 +23,9 @@ class RouteDetailFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val title = requireView().findViewById<TextView>(R.id.textTitle)
+        val db = DBHelper(requireContext())
 
-        val routes = arrayListOf<Route>(
-            Route("Trasa1", "Szczegóły trasy 1"),
-            Route("Trasa2", "Szczegóły trasy 2")
-        )
+        val routes = db.loadRoutes()
 
         val route = routes[routeId]
         title.text = route.getName()
