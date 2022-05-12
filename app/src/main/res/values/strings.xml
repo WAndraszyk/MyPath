@@ -4,4 +4,5 @@
     <string name="detail_button">Pokaż trasę</string>
     <string name="route_name">Nazwa trasy</string>
     <string name="route_detail">Szczegóły trasy</string>
+    <string name="placeholder">PLACEHOLDER</string>
 </resources>
