@@ -1,5 +1,6 @@
 package com.example.fragmenty
 
+import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -48,6 +49,7 @@ class RouteDetailFragment : Fragment() {
         outState.putInt("routeId", routeId)
     }
 
+    @SuppressLint("StaticFieldLeak")
     inner class DBHelper : AsyncTask<Void, Void, Void>() {
         var error = ""
 

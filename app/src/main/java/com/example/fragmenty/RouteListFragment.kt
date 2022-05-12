@@ -1,5 +1,6 @@
 package com.example.fragmenty
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -56,6 +57,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     inner class DBHelper : AsyncTask<Void, Void, Void>() {
         var error = ""
 
