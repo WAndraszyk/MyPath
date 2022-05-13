@@ -1,5 +1,7 @@
 package com.example.fragmenty
 
+import android.annotation.SuppressLint
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import java.sql.DriverManager
 
 class StoperFragment : Fragment() {
     private var seconds = 0
@@ -36,6 +39,7 @@ class StoperFragment : Fragment() {
         val startButton = view.findViewById<Button>(R.id.start_button)
         val stopButton = view.findViewById<Button>(R.id.stop_button)
         val resetButton = view.findViewById<Button>(R.id.reset_button)
+        val saveButton = view.findViewById<Button>(R.id.save_button)
 
         startButton.setOnClickListener(){
             onClickStart()
@@ -45,6 +49,9 @@ class StoperFragment : Fragment() {
         }
         resetButton.setOnClickListener(){
             onClickReset()
+        }
+        saveButton.setOnClickListener(){
+            onClickSave()
         }
     }
 
@@ -96,5 +103,26 @@ class StoperFragment : Fragment() {
                 handler.postDelayed(this, 1000)
             }
         })
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    inner class DBSaver : AsyncTask<Void, Void, Void>() {
+        var error = ""
+
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg p0: Void?): Void? {
+            try{
+                Class.forName("com.mysql.jdbc.Driver").newInstance()
+                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val connection = DriverManager.getConnection(url, "root","haslo")
+                val statement = connection.createStatement()
+                statement.executeQuery("select * from routes;")
+            }catch (e: Exception){
+                error = e.toString()
+                println("----------------DATABASE ERROR: $error--------------")
+            }
+
+            return null
+        }
     }
 }
