@@ -12,7 +12,7 @@ class DetailActivity : AppCompatActivity() {
 
         val id: Int = intent.getIntExtra("routeId", 0)
         val frag: RouteDetailFragment =
-            supportFragmentManager.findFragmentById(R.id.detail_frag) as RouteDetailFragment
+            supportFragmentManager.findFragmentById(R.id.detail_frag_container) as RouteDetailFragment
         frag.setRoute(id)
     }
 }

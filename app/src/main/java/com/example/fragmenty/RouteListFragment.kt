@@ -40,7 +40,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         namesListView.adapter = adapter
         namesListView.setOnItemClickListener { parent, _, position, _ ->
             parent.getItemAtPosition(position) // The item that was clicked
-            val fragmentContainer = r.findViewById<FragmentContainerView>(R.id.fragment_container)
+            val fragmentContainer = r.findViewById<LinearLayoutCompat>(R.id.fragment_container)
             if(fragmentContainer != null){
                 val details = RouteDetailFragment()
                 val ft = parentFragmentManager.beginTransaction()

@@ -5,4 +5,7 @@
     <string name="route_name">Nazwa trasy</string>
     <string name="route_detail">Szczegóły trasy</string>
     <string name="placeholder">PLACEHOLDER</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="reset">Reset</string>
 </resources>

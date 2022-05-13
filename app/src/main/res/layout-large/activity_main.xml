@@ -11,10 +11,24 @@
         android:id="@+id/list_frag"
         android:layout_weight="2"
         tools:layout="@layout/fragment_route_list" />
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_weight="3"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <androidx.fragment.app.FragmentContainerView
+            android:name="com.example.fragmenty.RouteDetailFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/detail_frag_container" />
+        <androidx.fragment.app.FragmentContainerView
+            android:name="com.example.fragmenty.StoperFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/stoper"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
