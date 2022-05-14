@@ -11,8 +11,13 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val id: Int = intent.getIntExtra("routeId", 0)
-        val frag: RouteDetailFragment =
-            supportFragmentManager.findFragmentById(R.id.detail_frag_container) as RouteDetailFragment
-        frag.setRoute(id)
+        setRoute(id)
+    }
+
+    private fun setRoute(id: Int){
+        val sharedScore = this.getSharedPreferences("com.example.fragmenty.shared",0)
+        val edit = sharedScore?.edit()
+        edit?.putInt("id", id)
+        edit?.apply()
     }
 }

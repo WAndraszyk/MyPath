@@ -11,14 +11,10 @@ import android.widget.TextView
 import java.sql.DriverManager
 
 class RouteDetailFragment : Fragment() {
-    private var routeId = -1
     val routes = mutableListOf<Route>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(savedInstanceState != null){
-            routeId = savedInstanceState.getInt("routeId")
-        }
         val db = DBHelper()
         val exe = db.execute().get()
     }
@@ -29,24 +25,20 @@ class RouteDetailFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_route_detail, container, false)
     }
 
-    fun setRoute(id: Int){
-        routeId = id
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = view.findViewById<TextView>(R.id.textTitle)
+        val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+        val routeId = sharedScore?.getInt("id", -1)
 
-        if (routeId >= 0) {
-            val route = routes[routeId]
-            title.text = route.getName()
-            val description = view.findViewById<TextView>(R.id.textDescription)
-            description.text = route.getWay()
+        if (routeId != null) {
+            if (routeId >= 0) {
+                val route = routes[routeId]
+                title.text = route.getName()
+                val description = view.findViewById<TextView>(R.id.textDescription)
+                description.text = route.getWay()
+            }
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("routeId", routeId)
     }
 
     @SuppressLint("StaticFieldLeak")

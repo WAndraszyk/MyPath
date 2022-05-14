@@ -44,7 +44,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
             if(fragmentContainer != null){
                 val details = RouteDetailFragment()
                 val ft = parentFragmentManager.beginTransaction()
-                details.setRoute(position)
+                setRoute(position)
                 ft.replace(R.id.fragment_container, details)
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 ft.addToBackStack(null)
@@ -55,6 +55,13 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
                 startActivity(intent)
             }
         }
+    }
+
+    private fun setRoute(id: Int){
+        val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+        val edit = sharedScore?.edit()
+        edit?.putInt("id", id)
+        edit?.apply()
     }
 
     @SuppressLint("StaticFieldLeak")
