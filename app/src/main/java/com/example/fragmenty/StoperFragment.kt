@@ -87,6 +87,10 @@ class StoperFragment : Fragment() {
         seconds = 0
     }
 
+    private fun onClickSave() {
+        TODO()
+    }
+
     private fun runStoper(view: View){
         val timeView = view.findViewById<TextView>(R.id.time_view)
         val handler = Handler(Looper.getMainLooper())
@@ -116,7 +120,7 @@ class StoperFragment : Fragment() {
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                statement.executeQuery("select * from routes;")
+                statement.executeQuery("insert into routes_times values();")
             }catch (e: Exception){
                 error = e.toString()
                 println("----------------DATABASE ERROR: $error--------------")
