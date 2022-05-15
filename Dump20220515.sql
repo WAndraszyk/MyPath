@@ -37,8 +37,34 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES ('Trasa 1','Szczeg¢ˆy trasy nr 1'),('Trasa 2','Szczeg¢ˆy trasy nr 2'),('Trasa 3','Szczeg¢ˆy trasy nr 3');
+INSERT INTO `routes` VALUES ('Route1','Route details 1'),('Route2','Route details 2'),('Route3','Route details 3');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `routes_times`
+--
+
+DROP TABLE IF EXISTS `routes_times`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `routes_times` (
+  `date` datetime DEFAULT NULL,
+  `score` time DEFAULT NULL,
+  `route` varchar(50) DEFAULT NULL,
+  KEY `route` (`route`),
+  CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route`) REFERENCES `routes` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `routes_times`
+--
+
+LOCK TABLES `routes_times` WRITE;
+/*!40000 ALTER TABLE `routes_times` DISABLE KEYS */;
+INSERT INTO `routes_times` VALUES ('2022-05-15 07:18:32','00:00:11','Route1'),('2022-05-15 07:19:26','00:00:11','Route1'),('2022-05-15 07:40:43','00:00:02','Route1'),('2022-05-15 07:47:01','00:00:06','Route1'),('2022-05-15 07:47:17','00:00:07','Route2'),('2022-05-15 07:47:37','00:00:11','Route2'),('2022-05-15 07:19:41','00:00:04','Route3'),('2022-05-15 07:20:11','00:00:12','Route3'),('2022-05-15 09:21:45','00:00:06','Route3');
+/*!40000 ALTER TABLE `routes_times` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-12 11:41:26
+-- Dump completed on 2022-05-15 22:32:50
