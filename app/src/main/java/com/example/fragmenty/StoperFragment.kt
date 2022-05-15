@@ -1,6 +1,7 @@
 package com.example.fragmenty
 
 import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
@@ -10,8 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import java.sql.DriverManager
+import java.sql.Time
+import java.util.*
 
 class StoperFragment : Fragment() {
     private var seconds = 0
@@ -88,7 +92,12 @@ class StoperFragment : Fragment() {
     }
 
     private fun onClickSave() {
-        TODO()
+        if (!running) {
+            val saver = DBSaver()
+            saver.execute()
+        }else{
+            Toast.makeText(activity,"Counting still running!",Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun runStoper(view: View){
@@ -113,18 +122,33 @@ class StoperFragment : Fragment() {
     inner class DBSaver : AsyncTask<Void, Void, Void>() {
         var error = ""
 
-        @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): Void? {
+        private fun insert(time: Time, date: String) {
+            val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+            val name = sharedScore?.getString("name", "")
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                statement.executeQuery("insert into routes_times values();")
+                statement.executeUpdate("insert into routes_times values('$date', '$time', '$name');")
+                activity!!.runOnUiThread {
+                    Toast.makeText(activity,"Saved to database!",Toast.LENGTH_SHORT).show()
+                }
             }catch (e: Exception){
                 error = e.toString()
                 println("----------------DATABASE ERROR: $error--------------")
             }
+        }
+
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg p0: Void?): Void? {
+            val hours = seconds / 3600
+            val minutes = seconds % 3600 / 60
+            val secs = seconds % 60
+            val time = Time(hours, minutes, secs)
+            val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.US);
+            val date = sdf.format(System.currentTimeMillis());
+            insert(time, date)
 
             return null
         }
