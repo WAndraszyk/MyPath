@@ -68,6 +68,9 @@ class RouteDetailFragment : Fragment() {
                 val route = routes[routeId!!]
                 name = route.getName()
                 way = route.getWay()
+                val edit = sharedScore.edit()
+                edit.putString("name", name)
+                edit.apply()
 
                 resultSet = statement.executeQuery("select date, score, route from routes_times \n" +
                         "where score = (select min(score) from routes_times where route = '$name')\n" +
