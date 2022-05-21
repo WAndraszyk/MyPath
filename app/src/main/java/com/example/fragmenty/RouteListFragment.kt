@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
@@ -33,7 +34,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         super.onViewCreated(view, savedInstanceState)
         val namesListView = view.findViewById(R.id.name_list) as ListView
 
-        val r = (view.parent as ViewGroup).parent as NestedScrollView
+        val r = (view.parent as ViewGroup).parent as LinearLayoutCompat
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_list_item_1, names)
