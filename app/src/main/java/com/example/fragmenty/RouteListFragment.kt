@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
@@ -33,7 +33,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         super.onViewCreated(view, savedInstanceState)
         val namesListView = view.findViewById(R.id.name_list) as ListView
 
-        val r = (view.parent as ViewGroup).parent as LinearLayoutCompat
+        val r = (view.parent as ViewGroup).parent as NestedScrollView
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_list_item_1, names)
@@ -75,10 +75,11 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                val resultSet = statement.executeQuery("select * from routes;")
+                val resultSet = statement.executeQuery("select * from routes order by name;")
                 while(resultSet.next()){
                     val name = resultSet.getString(1)
                     val way = resultSet.getString(2)
+                    println("$name, $way")
                     routes.add(Route(name, way))
                 }
             }catch (e: Exception){

@@ -9,4 +9,7 @@
     <string name="stop">Stop</string>
     <string name="reset">Reset</string>
     <string name="save">Save</string>
+    <string name="top_header">Jakiś nagłówek</string>
+    <string name="top_image">Jakiś obrazek</string>
+    <string name="top_text">Jakieś kilkuzdaniowe bla bla bla.</string>
 </resources>
