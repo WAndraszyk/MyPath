@@ -2,12 +2,14 @@ package com.example.fragmenty
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.RelativeLayout
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -34,7 +36,11 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         super.onViewCreated(view, savedInstanceState)
         val namesListView = view.findViewById(R.id.name_list) as ListView
 
-        val r = (view.parent as ViewGroup).parent as LinearLayoutCompat
+        val r = if((resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE){
+            (view.parent as ViewGroup).parent as LinearLayoutCompat
+        }else{
+            (view.parent as ViewGroup).parent as RelativeLayout
+        }
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(), android.R.layout.simple_list_item_1, names)

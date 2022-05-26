@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include
+        layout="@layout/toolbar_main"
+        android:id="@+id/toolbar"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list_fragment"
         android:name="com.example.fragmenty.RouteListFragment"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_route_list" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
 
 
 
