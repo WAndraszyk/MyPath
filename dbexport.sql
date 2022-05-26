@@ -37,7 +37,7 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES ('Route1','Route details 1'),('Route2','Route details 2'),('Route3','Route details 3');
+INSERT INTO `routes` VALUES ('Route1','Route details 1'),('Route10','Route details 10'),('Route2','Route details 2'),('Route3','Route details 3'),('Route4','Route details 4'),('Route5','Route details 5'),('Route6','Route details 6'),('Route7','Route details 7'),('Route8','Route details 8'),('Route9','Route details 9');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-15 22:32:50
+-- Dump completed on 2022-05-26 15:24:23
