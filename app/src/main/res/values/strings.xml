@@ -12,4 +12,20 @@
     <string name="top_header">Jakiś nagłówek</string>
     <string name="top_image">Jakiś obrazek</string>
     <string name="top_text">Jakieś kilkuzdaniowe bla bla bla.</string>
+    <string name="title_top">Fragment główny</string>
+    <string-array name="kategoria1">
+        <item>Pozycja 1 Kat. 1</item>
+        <item>Pozycja 2 Kat. 1 </item>
+        <item>Pozycja 3 Kat. 1 </item>
+    </string-array>
+    <string-array name="kategoria2">
+        <item>Kat. 2 Pozycja 1</item>
+        <item>Kat. 2 Pozycja 2</item>
+        <item>Kat. 2 Pozycja 3 </item>
+    </string-array>
+    <string-array name="kategoria3">
+        <item>Kat. 3 Pozycja 1</item>
+        <item>Kat. 3 Pozycja 2</item>
+        <item>Kat. 3 Pozycja 3 </item>
+    </string-array>
 </resources>
