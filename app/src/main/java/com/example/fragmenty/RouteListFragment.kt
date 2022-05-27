@@ -21,6 +21,7 @@ import java.sql.DriverManager
 class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
     val routes = mutableListOf<Route>()
     private val names = mutableListOf<String>()
+    private val images = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
 
         for (i in routes) {
             names.add(i.getName())
+            images.add(i.getImage())
         }
     }
 
@@ -86,8 +88,8 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
                 while(resultSet.next()){
                     val name = resultSet.getString(1)
                     val way = resultSet.getString(2)
-                    println("$name, $way")
-                    routes.add(Route(name, way))
+                    val image = resultSet.getString(3)
+                    routes.add(Route(name, way, image))
                 }
             }catch (e: Exception){
                 error = e.toString()
