@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction
 import java.sql.DriverManager
 
 
-class Tab1Fragment : Fragment() {
+class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
 
     val routes = mutableListOf<Route>()
     private val names = mutableListOf<String>()
@@ -38,10 +38,12 @@ class Tab1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val namesListView = view.findViewById(R.id.name_list) as ListView
 
+        val frag = this.parentFragment?.view?.parent as ViewGroup
+
         val r = if((resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE){
-            (view.parent as ViewGroup).parent as LinearLayoutCompat
+            frag.parent as LinearLayoutCompat
         }else{
-            (view.parent as ViewGroup).parent as RelativeLayout
+            frag.parent as RelativeLayout
         }
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
