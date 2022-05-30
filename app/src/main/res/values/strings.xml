@@ -13,4 +13,5 @@
     <string name="about">MyPath is a mobile app made for storing information about bicycle and walking routes near you!\nWith this app you can see the list of available routes,
         their details and stats.\nYou can also measure the time it takes you to finish a route with a stopwatch.
     </string>
+    <string name="fab_descritpion">FAB</string>
 </resources>
