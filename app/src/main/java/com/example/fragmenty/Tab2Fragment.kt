@@ -54,12 +54,12 @@ class Tab2Fragment : Fragment(R.layout.fragment_tab2) {
             val fragmentContainer = r.findViewById<FragmentContainerView>(R.id.fragment_container)
             if(fragmentContainer != null){
                 val details = RouteDetailFragment()
-                val ft = parentFragmentManager.beginTransaction()
+                val ft = activity?.supportFragmentManager?.beginTransaction()
                 setRoute(position)
-                ft.replace(R.id.fragment_container, details)
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                ft.addToBackStack(null)
-                ft.commit()
+                ft?.replace(R.id.fragment_container, details)
+                ft?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                ft?.addToBackStack(null)
+                ft?.commit()
             }else{
                 val intent = Intent(requireContext(), DetailActivity()::class.java)
                 intent.putExtra("routeId", position)
