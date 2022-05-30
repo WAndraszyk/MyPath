@@ -44,7 +44,11 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
 
         if (pager != null && tableLayout != null) {
             TabLayoutMediator(tableLayout, pager) { tab, position ->
-                tab.text = "Tab " + (position + 1)
+                when (position){
+                    0 -> tab.text = "About"
+                    1 -> tab.text = "Bicycle"
+                    2 -> tab.text = "Walking"
+                }
             }.attach()
         }
 
