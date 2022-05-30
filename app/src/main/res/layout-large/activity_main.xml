@@ -24,12 +24,5 @@
             android:layout_weight="1"
             android:id="@+id/fragment_container"
             tools:layout="@layout/fragment_route_detail" />
-        <androidx.fragment.app.FragmentContainerView
-            android:name="com.example.fragmenty.StoperFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/stoper"
-            tools:layout="@layout/fragment_stoper" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

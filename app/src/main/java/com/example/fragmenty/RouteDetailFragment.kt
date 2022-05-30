@@ -1,6 +1,8 @@
 package com.example.fragmenty
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.os.Bundle
@@ -40,6 +42,11 @@ class RouteDetailFragment : Fragment() {
 
         fab.setOnClickListener(){
             println("------------------------FAB-----------------------")
+            // dla smartfona
+            if((resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) < Configuration.SCREENLAYOUT_SIZE_LARGE) {
+                val intent = Intent(requireContext(), StatisticsActivity()::class.java)
+                startActivity(intent)
+            }
         }
         return view
     }

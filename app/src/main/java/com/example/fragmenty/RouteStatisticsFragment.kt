@@ -33,7 +33,7 @@ class RouteStatisticsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_route_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_route_statistics, container, false)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
 
@@ -51,8 +51,6 @@ class RouteStatisticsFragment : Fragment() {
             imageView.setImageResource(id)
         }
         title.text = name
-        val description = view.findViewById<TextView>(R.id.textDescription)
-        description.text = way
         val textRecord = view.findViewById<TextView>(R.id.textRecord)
         textRecord.text = "Record of the route: $record on $recordDate"
         val textLastTime = view.findViewById<TextView>(R.id.textLastTime)

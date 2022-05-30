@@ -47,22 +47,40 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:context=".RouteDetailFragment">
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textTitle"
-                android:text="@string/placeholder"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/textRecord"
-                android:text="@string/placeholder"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:id="@+id/textLastTime"
-                android:text="@string/placeholder"/>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textTitle"
+                    android:text="@string/placeholder"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textRecord"
+                    android:text="@string/placeholder"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textLastTime"
+                    android:text="@string/placeholder"/>
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textAllTimes"
+                    android:text="@string/placeholder"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.fragment.app.FragmentContainerView
+                android:name="com.example.fragmenty.StoperFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/stoper"
+                tools:layout="@layout/fragment_stoper" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
