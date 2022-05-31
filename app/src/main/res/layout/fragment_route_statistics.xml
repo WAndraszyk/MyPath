@@ -68,11 +68,6 @@
                     android:layout_width="wrap_content"
                     android:id="@+id/textLastTime"
                     android:text="@string/placeholder"/>
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/textAllTimes"
-                    android:text="@string/placeholder"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
 
