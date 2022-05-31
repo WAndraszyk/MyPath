@@ -47,6 +47,11 @@ class RouteDetailFragment : Fragment() {
                 val intent = Intent(requireContext(), StatisticsActivity()::class.java)
                 startActivity(intent)
             }
+            // dla tabletu
+            else{
+                val intent = Intent(requireContext(), StatisticsActivity()::class.java)
+                startActivity(intent)
+            }
         }
         return view
     }
