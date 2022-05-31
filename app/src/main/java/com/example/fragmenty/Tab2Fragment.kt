@@ -12,6 +12,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.sql.DriverManager
@@ -39,7 +40,7 @@ class Tab2Fragment : Fragment(R.layout.fragment_tab2) {
             }
         }
 
-        layoutManager = LinearLayoutManager(requireContext())
+        layoutManager = GridLayoutManager(requireContext(),2)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
