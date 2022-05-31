@@ -5,8 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".Tab2Fragment"
     android:id="@+id/fragment_tab2">
-    <ListView
-        android:id="@+id/name_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

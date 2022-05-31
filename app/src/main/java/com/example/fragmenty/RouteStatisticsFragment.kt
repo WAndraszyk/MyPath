@@ -73,7 +73,8 @@ class RouteStatisticsFragment : Fragment() {
                     val name = resultSet.getString(1)
                     val way = resultSet.getString(2)
                     val image = resultSet.getString(3)
-                    routes.add(Route(name, way, image))
+                    val type = resultSet.getString(4)
+                    routes.add(Route(name, way, image, type))
                 }
 
                 val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)

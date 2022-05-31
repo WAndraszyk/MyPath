@@ -1,6 +1,6 @@
 package com.example.fragmenty
 
-class Route (private val name: String, private val way: String, private val image: String){
+class Route (private val name: String, private val way: String, private val image: String, private val type: String){
 
     fun getName(): String {
         return name
@@ -12,6 +12,10 @@ class Route (private val name: String, private val way: String, private val imag
 
     fun getImage(): String {
         return image
+    }
+
+    fun getType(): String {
+        return type
     }
 
     override fun toString(): String {
