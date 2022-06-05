@@ -18,15 +18,15 @@ class AnimatedActivity : AppCompatActivity() {
         fm.beginTransaction().add(R.id.fragment_container,fragment).commit()
     }
 
-    override fun onStart() {
-        super.onStart()
-        fragment.startAnimation()
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        if(hasFocus) {
+            fragment.startAnimation()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 7500)
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }, 7500)
+        }
     }
-
 }
