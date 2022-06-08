@@ -67,7 +67,7 @@ class Tab3Fragment : Fragment(R.layout.fragment_tab3) {
         if(fragmentContainer != null){
             val details = RouteDetailFragment()
             val ft = activity?.supportFragmentManager?.beginTransaction()
-            setRoute(position)
+            setRoute(position+bikeRoutes)
             ft?.replace(R.id.fragment_container, details)
             ft?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             ft?.addToBackStack(null)
