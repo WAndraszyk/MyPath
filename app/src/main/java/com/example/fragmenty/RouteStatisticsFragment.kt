@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentTransaction
 import java.sql.Date
 import java.sql.DriverManager
 import java.sql.Time
@@ -27,7 +28,14 @@ class RouteStatisticsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        if (savedInstanceState == null) {
+            val stoper = StoperFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.add(R.id.stoper_container, stoper)
+            ft.addToBackStack(null)
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            ft.commit()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

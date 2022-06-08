@@ -73,6 +73,7 @@ class StoperFragment : Fragment() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         outState.putInt("seconds", seconds)
         outState.putBoolean("running", running)
         outState.putBoolean("wasRunning", wasRunning)

@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/route_statistics_layout">
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -79,11 +80,9 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-    android:name="com.example.fragmenty.StoperFragment"
+    <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="4"
-    android:id="@+id/stoper"
-    tools:layout="@layout/fragment_stoper" />
+    android:id="@+id/stoper_container" />
 </androidx.appcompat.widget.LinearLayoutCompat>
