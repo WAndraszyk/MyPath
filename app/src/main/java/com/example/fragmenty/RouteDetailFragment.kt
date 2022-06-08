@@ -25,6 +25,7 @@ class RouteDetailFragment : Fragment() {
     val routes = mutableListOf<Route>()
     private var name = ""
     private var way = ""
+    private var image = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +60,13 @@ class RouteDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = view.findViewById<TextView>(R.id.textTitle)
+        val imageView = view.findViewById<ImageView>(R.id.image)
         val db = DBHelper()
         val exe = db.execute().get()
+        val id = context?.resources?.getIdentifier("drawable/$image", null, context?.packageName)
+        if (id != null) {
+            imageView.setImageResource(id)
+        }
         title.text = name
         val description = view.findViewById<TextView>(R.id.textDescription)
         description.text = way
@@ -91,6 +97,7 @@ class RouteDetailFragment : Fragment() {
                 val route = routes[routeId!!]
                 name = route.getName()
                 way = route.getWay()
+                image = route.getImage()
                 val edit = sharedScore.edit()
                 edit.putString("name", name)
                 edit.apply()

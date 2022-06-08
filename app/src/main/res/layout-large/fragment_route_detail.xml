@@ -14,6 +14,13 @@
         <include
             layout="@layout/toolbar_main"
             android:id="@+id/toolbar" />
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/top_image"
+            android:fitsSystemWindows="true"/>
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
