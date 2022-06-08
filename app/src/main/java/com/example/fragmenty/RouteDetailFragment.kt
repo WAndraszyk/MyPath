@@ -42,17 +42,8 @@ class RouteDetailFragment : Fragment() {
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener(){
-            println("------------------------FAB-----------------------")
-            // dla smartfona
-            if((resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) < Configuration.SCREENLAYOUT_SIZE_LARGE) {
-                val intent = Intent(requireContext(), StatisticsActivity()::class.java)
-                startActivity(intent)
-            }
-            // dla tabletu
-            else{
-                val intent = Intent(requireContext(), StatisticsActivity()::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(requireContext(), StatisticsActivity()::class.java)
+            startActivity(intent)
         }
         return view
     }
