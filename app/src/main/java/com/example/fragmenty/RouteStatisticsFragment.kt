@@ -68,7 +68,7 @@ class RouteStatisticsFragment : Fragment() {
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                var resultSet = statement.executeQuery("select * from routes;")
+                var resultSet = statement.executeQuery("select * from routes order by type, name;")
                 while(resultSet.next()){
                     val name = resultSet.getString(1)
                     val way = resultSet.getString(2)

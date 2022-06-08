@@ -25,6 +25,7 @@ class Tab3Fragment : Fragment(R.layout.fragment_tab3) {
     private val images = mutableListOf<Int>()
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<RecyclerAdapter.ViewHolder>? = null
+    private var bikeRoutes = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +74,7 @@ class Tab3Fragment : Fragment(R.layout.fragment_tab3) {
             ft?.commit()
         }else{
             val intent = Intent(requireContext(), DetailActivity()::class.java)
-            intent.putExtra("routeId", position)
+            intent.putExtra("routeId", position+bikeRoutes)
             startActivity(intent)
         }
     }
@@ -104,6 +105,12 @@ class Tab3Fragment : Fragment(R.layout.fragment_tab3) {
                     val type = resultSet.getString(4)
                     routes.add(Route(name, way, image, type))
                 }
+
+                val counting = statement.executeQuery("select count(*) from routes where type = 'bicycle';")
+                while(counting.next()){
+                    bikeRoutes = counting.getInt(1);
+                }
+
             }catch (e: Exception){
                 error = e.toString()
                 println("----------------DATABASE ERROR: $error--------------")
