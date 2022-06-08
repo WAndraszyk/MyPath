@@ -27,6 +27,8 @@ DROP TABLE IF EXISTS `routes`;
 CREATE TABLE `routes` (
   `name` varchar(50) NOT NULL DEFAULT '',
   `way` varchar(1000) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +39,7 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES ('Route1','Route details 1'),('Route10','Route details 10'),('Route2','Route details 2'),('Route3','Route details 3'),('Route4','Route details 4'),('Route5','Route details 5'),('Route6','Route details 6'),('Route7','Route details 7'),('Route8','Route details 8'),('Route9','Route details 9');
+INSERT INTO `routes` VALUES ('Bicycle Ring of the Poznan Powiat','The bicycle route around Poznan with seven connecting routes leading to it from the city center was conceived as a network of tourist routes. The route passes through interesting regions (Wielkopolski National Park, Puszcza Zielonka Landscape Park, Promno Landscape Park, Rogalinski Landscape Park and the most famous towns in the vicinity of the capital of Wielkopolska). The trail goes through Kornik, Rogalin, Steszew, Biedrusko, and Kostrzyn. The route runs through the military training ground in Biedrusko, access to which is possible after obtaining a pass. You can also take a detour.','ring','bicycle'),('Citadel Park','Walking tour through Citadel Park in Poznan\nThere are two museums in the park - the \"Poznan\" Army Museum and the Armaments Museum. Near the Monument to the Heroes, there is a monument to the Marshal of the Soviet Union, Vasily Chuikov (1900-82), the commander of the 8th Guards Army, whose troops stormed the Citadel in 1945, unveiled in 1982.','cytadela','walking'),('Gniezno - Poznan around Malta lake','From Gniezno along the S5 via the service station to Lubow and Kostrzyn, then along the old 2 and from Jasin by the pavement, in Antonin near VW via the underground passage to Leszka street, a kilometer through the forest and you are there! Add 50 km to return to Gniezno the same way','malta','bicycle'),('Morasko Meteorite Reserve','The route starts from the forest parking lot towards the north to the meteorite craters. The beginning of the educational path. Natural Monument. Craters. Elm and autumn riparian forests. Former forester\'s lodge. Former gravel pit. Morasko Mountain. Peatbog. Cold Water. End of the educational path. END - Forest parking.','morasko','walking'),('Poznan two castles','Walking tour to the Royal Castle and the Imperial Castle in Poznan.\nThe Royal Castle in Poznan is the oldest surviving royal residence in Poland. The building was erected on Przemysla Hill in the 13th century, first as a residential tower for Przemysl I, and later expanded by his son Przemysl II - the first king of Poland after the division into districts. The death of Przemysl II prevented the completion of the work, it was only in the 14th century that Casimir the Great did it, during which the castle became the largest secular building in Europe at that time.\nThe Imperial Castle is the last and youngest royal residence in Europe. It was built for the German Emperor Wilhelm II, designed by Franz Schwechten in 1905-1910. It was erected on the model of medieval castles - as a symbol of German rule in Greater Poland.','castle','walking'),('Rusalka-Strzeszyn-Kiekrz','The route is mainly intended for amateurs of Sunday rides. Most of the route runs through forests and their edges. \nThe road is mostly compacted gravel or black earth, \nonly in the vicinity of Lake Kierskie we have asphalt, \nbut there is no car traffic (there are posts blocking the \nentrances). The greatest difficulty may be Sunday strollers \nwith children walking along the entire width of the paths \n(who are rarely led by the hand - sections to Rusalka and \nStrzeszyn) and the crossing of ul. Lutycka (Poznan bypass) - \nwe will cross it twice.','rusalka','bicycle');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,7 +55,7 @@ CREATE TABLE `routes_times` (
   `score` time DEFAULT NULL,
   `route` varchar(50) DEFAULT NULL,
   KEY `route` (`route`),
-  CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route`) REFERENCES `routes` (`name`)
+  CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route`) REFERENCES `routes` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -63,7 +65,7 @@ CREATE TABLE `routes_times` (
 
 LOCK TABLES `routes_times` WRITE;
 /*!40000 ALTER TABLE `routes_times` DISABLE KEYS */;
-INSERT INTO `routes_times` VALUES ('2022-05-15 07:18:32','00:00:11','Route1'),('2022-05-15 07:19:26','00:00:11','Route1'),('2022-05-15 07:40:43','00:00:02','Route1'),('2022-05-15 07:47:01','00:00:06','Route1'),('2022-05-15 07:47:17','00:00:07','Route2'),('2022-05-15 07:47:37','00:00:11','Route2'),('2022-05-15 07:19:41','00:00:04','Route3'),('2022-05-15 07:20:11','00:00:12','Route3'),('2022-05-15 09:21:45','00:00:06','Route3');
+INSERT INTO `routes_times` VALUES ('2022-06-08 04:28:06','00:00:05','Bicycle Ring of the Poznan Powiat'),('2022-06-08 04:28:25','00:00:08','Bicycle Ring of the Poznan Powiat'),('2022-06-08 04:29:07','00:00:02','Gniezno - Poznan around Malta lake'),('2022-06-08 04:29:17','00:00:04','Gniezno - Poznan around Malta lake'),('2022-06-08 04:29:32','00:00:04','Rusalka-Strzeszyn-Kiekrz'),('2022-06-08 04:29:44','00:00:08','Rusalka-Strzeszyn-Kiekrz'),('2022-06-08 04:30:07','00:00:01','Citadel Park'),('2022-06-08 04:30:19','00:00:07','Citadel Park'),('2022-06-08 04:30:36','00:00:04','Morasko Meteorite Reserve'),('2022-06-08 04:30:49','00:00:07','Morasko Meteorite Reserve'),('2022-06-08 04:31:06','00:00:01','Poznan two castles'),('2022-06-08 04:31:42','00:00:34','Poznan two castles');
 /*!40000 ALTER TABLE `routes_times` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -76,4 +78,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-26 15:24:23
+-- Dump completed on 2022-06-08 18:37:47
