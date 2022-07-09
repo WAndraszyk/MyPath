@@ -94,6 +94,7 @@ class RouteStatisticsFragment : Fragment() {
 
                 val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
                 val routeId = sharedScore?.getInt("id", -1)
+                val user = sharedScore?.getString("username", "")
                 val route = routes[routeId!!]
                 name = route.getName()
                 way = route.getWay()
@@ -103,15 +104,15 @@ class RouteStatisticsFragment : Fragment() {
                 edit.apply()
 
                 resultSet = statement.executeQuery("select date, score, route from routes_times \n" +
-                        "where score = (select min(score) from routes_times where route = '$name')\n" +
-                        "and route = '$name'")
+                        "where score = (select min(score) from routes_times where route = '$name' and user = '$user')\n" +
+                        "and route = '$name' and user = '$user';")
                 while(resultSet.next()){
                     recordDate = resultSet.getDate(1)
                     record = resultSet.getTime(2)
                 }
                 resultSet = statement.executeQuery("select date, score, route from routes_times \n" +
-                        "where date = (select max(date) from routes_times where route = '$name')\n" +
-                        "and route = '$name'")
+                        "where date = (select max(date) from routes_times where route = '$name' and user = '$user')\n" +
+                        "and route = '$name' and user = '$user';")
                 while(resultSet.next()){
                     lastTimeDate = resultSet.getDate(1)
                     lastTime = resultSet.getTime(2)
