@@ -9,4 +9,13 @@
     app:contentInsetStartWithNavigation="0dp"
     app:layout_collapseMode="pin"
     app:titleTextColor="@color/white"
-    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+    app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+    android:paddingStart="15dp"
+    android:paddingEnd="15dp">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logOutIcon"
+        android:src="@drawable/ic_baseline_exit_to_app_24"
+        android:layout_gravity="end"/>
+</androidx.appcompat.widget.Toolbar>

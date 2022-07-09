@@ -70,15 +70,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onRestart() {
-        super.onRestart()
+    override fun onStart() {
+        super.onStart()
         success = false
         val nickField = findViewById<EditText>(R.id.nick)
         val passwordField = findViewById<EditText>(R.id.password)
         nickField.text.clear()
         passwordField.text.clear()
         val db = DBLogOut()
-        db.execute()
+        val wait = db.execute().get()
     }
 
     override fun onStop() {
