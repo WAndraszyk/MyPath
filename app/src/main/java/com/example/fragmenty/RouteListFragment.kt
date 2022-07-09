@@ -52,6 +52,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
         val logOut = view?.findViewById<ImageView>(R.id.logOutIcon)
         logOut?.setOnClickListener{
             val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent)
         }
 
