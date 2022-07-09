@@ -39,6 +39,12 @@ class RouteDetailFragment : Fragment() {
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
         (activity as AppCompatActivity?)!!.supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.purple_500)))
 
+        val logOut = view.findViewById<ImageView>(R.id.logOutIcon)
+        logOut.setOnClickListener{
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
 
         fab.setOnClickListener(){

@@ -1,6 +1,7 @@
 package com.example.fragmenty
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -44,6 +45,12 @@ class RouteStatisticsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_route_statistics, container, false)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+
+        val logOut = view.findViewById<ImageView>(R.id.logOutIcon)
+        logOut.setOnClickListener{
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
 
         return view
     }
