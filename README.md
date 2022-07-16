@@ -9,10 +9,10 @@
 - wykorzystanie zdalnej bazy danych – 2 pkt ✔
 - wykorzystanie lokalnej bazy danych – 1 pkt ❌
 - wykorzystanie darmowej usługi zewnętrznej do zasilania aplikacji danymi (kalendarz, serwisy
-meteo, rozpoznawanie obrazów ...) – 2 pkt
+meteo, rozpoznawanie obrazów ...) – 2 pkt ✔
 - wykorzystanie jednego z serwisów mapowych – 2 pkt
 - wykorzystanie interfejsu do wybranych serwisów społecznościowych – 1 pkt
 - uwzględnienie aspektów energochłonności aplikacji (oszczędzanie energii) – 2 pkt
 - oryginalność pomysłu (brak podobnych aplikacji na rynku) – 3 pkt ❌
 
-So far: 5pkt
+So far: 7pkt
