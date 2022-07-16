@@ -54,6 +54,7 @@ CREATE TABLE `routes_times` (
   `date` datetime DEFAULT NULL,
   `score` time DEFAULT NULL,
   `route` varchar(50) DEFAULT NULL,
+  `user` varchar(30) DEFAULT NULL,
   KEY `route` (`route`),
   CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route`) REFERENCES `routes` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -65,8 +66,33 @@ CREATE TABLE `routes_times` (
 
 LOCK TABLES `routes_times` WRITE;
 /*!40000 ALTER TABLE `routes_times` DISABLE KEYS */;
-INSERT INTO `routes_times` VALUES ('2022-06-08 04:28:06','00:00:05','Bicycle Ring of the Poznan Powiat'),('2022-06-08 04:28:25','00:00:08','Bicycle Ring of the Poznan Powiat'),('2022-06-08 04:29:07','00:00:02','Gniezno - Poznan around Malta lake'),('2022-06-08 04:29:17','00:00:04','Gniezno - Poznan around Malta lake'),('2022-06-08 04:29:32','00:00:04','Rusalka-Strzeszyn-Kiekrz'),('2022-06-08 04:29:44','00:00:08','Rusalka-Strzeszyn-Kiekrz'),('2022-06-08 04:30:07','00:00:01','Citadel Park'),('2022-06-08 04:30:19','00:00:07','Citadel Park'),('2022-06-08 04:30:36','00:00:04','Morasko Meteorite Reserve'),('2022-06-08 04:30:49','00:00:07','Morasko Meteorite Reserve'),('2022-06-08 04:31:06','00:00:01','Poznan two castles'),('2022-06-08 04:31:42','00:00:34','Poznan two castles');
+INSERT INTO `routes_times` VALUES ('2022-07-09 09:19:13','00:00:03','Bicycle Ring of the Poznan Powiat','Witold'),('2022-07-09 09:19:32','00:00:05','Bicycle Ring of the Poznan Powiat','Witold');
 /*!40000 ALTER TABLE `routes_times` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `nick` varchar(30) NOT NULL,
+  `password` varchar(30) DEFAULT NULL,
+  `is_logged_in` int(11) DEFAULT NULL,
+  PRIMARY KEY (`nick`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('Tomasz','haslo',0),('Witold','haslo',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -78,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-08 18:37:47
+-- Dump completed on 2022-07-16 13:29:26
