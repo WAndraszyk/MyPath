@@ -10,16 +10,14 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getMainExecutor
 import androidx.fragment.app.Fragment
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Picasso
-import org.json.JSONException
+import java.io.BufferedReader
 import java.io.IOException
+import java.io.InputStreamReader
+import java.net.URL
 import java.util.*
 
 class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
@@ -35,6 +33,8 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
     private lateinit var locationManager: LocationManager
     private val PERMISSION_CODE = 1
     private lateinit var cityName: String
+    private lateinit var icon: String
+    private var notFound = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,13 +57,17 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
         if (location != null) {
             cityName = getCityName(location.latitude, location.longitude)
             cityName = cityName.normalize()
-            getWeatherInfo(cityName)
+            if(cityName != "Not found"){
+                getWeatherInfo(cityName)
+            }
         }else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 1F)
             { p0 ->
                 cityName = getCityName(p0.latitude, p0.longitude)
                 cityName = cityName.normalize()
-                getWeatherInfo(cityName)
+                if(cityName != "Not found"){
+                    getWeatherInfo(cityName)
+                }
             }
         }
 
@@ -72,7 +76,6 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
             if(city.isEmpty()){
                 Toast.makeText(activity,"Please enter city!",Toast.LENGTH_SHORT).show()
             }else{
-                cityNameTV.text = city
                 getWeatherInfo(city)
             }
         }
@@ -130,30 +133,52 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
     }
 
     private fun getWeatherInfo(cityName: String) {
-        val url = "http://api.weatherapi.com/v1/forecast.json?key=9093389d3dfd43c4b8e121340221007&q=$cityName&days=1&aqi=yes&alerts=yes"
-        cityNameTV.text = cityName
-        val requestQueue = Volley.newRequestQueue(requireContext())
+        val url = URL("https://api.weatherapi.com/v1/current.json?key=9093389d3dfd43c4b8e121340221007&q=$cityName&aqi=no")
+        val thread = Thread(){
+            run{
+                val mapper = ObjectMapper()
 
-        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
-            { response -> //TODO: CZEMU TO NIE DZIAŁA?
-                try {
+                val json = getJson(url)
+
+                if (!notFound) {
+                    cityNameTV.text = cityName
+
+                    val current = mapper.readTree(json).get("current")
+
+                    val temperature = current.get("temp_c").asText()
+                    temperatureTV.text = "$temperature°C"
+
+                    val condition = current.get("condition")
+
+                    val conditionText = condition.get("text").asText()
+                    conditionTV.text = conditionText
+                    icon = condition.get("icon").asText()
+                }
+            }
+            activity?.runOnUiThread(){
+                if (!notFound) {
+                    Picasso.get().load("https:$icon").into(iconIV)
                     loading.visibility = View.GONE
                     home.visibility = View.VISIBLE
-                    val temperature = response.getJSONObject("current").getString("temp_c")
-                    temperatureTV.text = "$temperature°C"
-                    val condition = response.getJSONObject("current").getJSONObject("condition").getString("text")
-                    conditionTV.text=condition
-                    val icon = response.getJSONObject("current").getJSONObject("condition").getString("icon")
-                    Picasso.get().load("http:$icon").into(iconIV)
-
-                }catch (e: JSONException){
-                    e.printStackTrace()
+                }else{
+                    Toast.makeText(activity,"No matching location found.",Toast.LENGTH_SHORT).show()
                 }
-            },
-            { error ->
-                Toast.makeText(activity,"Please enter city name!",Toast.LENGTH_SHORT).show()
-            })
+            }
+        }
+        thread.start()
+    }
 
-        requestQueue.add(jsonObjectRequest)
+    private fun getJson(url: URL): String? {
+        return try {
+            val input = BufferedReader(InputStreamReader(url.openStream()))
+            val json = input.readLine()
+            input.close()
+
+            notFound = false
+            json
+        }catch (e: Exception){
+            notFound = true
+            ""
+        }
     }
 }
