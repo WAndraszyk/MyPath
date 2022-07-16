@@ -79,13 +79,14 @@
             android:textSize="78sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/Icon"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/Temperature"
             android:layout_margin="10dp"
-            android:src="@mipmap/ic_launcher"/>
+            android:src="@mipmap/ic_launcher"
+            android:scaleType="fitXY"/>
 
         <TextView
             android:layout_width="match_parent"
