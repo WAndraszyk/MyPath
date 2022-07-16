@@ -2,13 +2,11 @@ package com.example.fragmenty
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.hardware.SensorManager
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.core.content.ContextCompat
 import java.sql.DriverManager
 
 class AnimatedActivity : AppCompatActivity() {

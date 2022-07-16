@@ -1,13 +1,10 @@
 package com.example.fragmenty
 
-import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerAdapter(private val titles: MutableList<String>, private var images: MutableList<Int>,
