@@ -7,7 +7,7 @@
 * sensory smartfona – 0,5 pkt za każdy sensownie wykorzystany sensor:
   - GPS ✔
   - zegar ✔
-* wykorzystanie interfejsu komunikacyjnego smartfona (np. BT, NFC, 4G, WiFi, SMS) - 2 pkt
+* wykorzystanie interfejsu komunikacyjnego smartfona (np. BT, NFC, 4G, WiFi, SMS) - 2 pkt ✔
 * wykorzystanie zdalnej bazy danych – 2 pkt ✔
 * wykorzystanie lokalnej bazy danych – 1 pkt ❌
 * wykorzystanie darmowej usługi zewnętrznej do zasilania aplikacji danymi (kalendarz, serwisy
@@ -17,4 +17,4 @@ meteo, rozpoznawanie obrazów ...) – 2 pkt ✔
 * uwzględnienie aspektów energochłonności aplikacji (oszczędzanie energii) – 2 pkt
 * oryginalność pomysłu (brak podobnych aplikacji na rynku) – 3 pkt ❌
 
-So far: 7pkt
+So far: 9pkt
