@@ -18,4 +18,4 @@ meteo, rozpoznawanie obrazów ...) – 2 pkt ✔
 * uwzględnienie aspektów energochłonności aplikacji (oszczędzanie energii) – 2 pkt
 * oryginalność pomysłu (brak podobnych aplikacji na rynku) – 3 pkt ❌
 
-So far: 7,5pkt
+So far: 7,5/11 pkt
