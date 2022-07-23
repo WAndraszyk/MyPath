@@ -7,8 +7,17 @@
         android:id="@+id/sky"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.61"
+        android:layout_weight="0.4"
         android:background="@color/blue_sky">
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:alpha="0"
+            android:text="MyPath"
+            android:textSize="100sp"/>
         <ImageView
             android:id="@+id/sun"
             android:layout_width="100dp"
@@ -16,9 +25,30 @@
             android:layout_gravity="center"
             android:src="@drawable/sun" />
     </FrameLayout>
-    <View
+    <FrameLayout
+        android:id="@+id/ground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.39"
-        android:background="@color/sea" />
+        android:layout_weight="0.6"
+        android:background="@color/ground">
+        <ImageView
+            android:id="@+id/path"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/path"/>
+        <ImageView
+            android:id="@+id/night_path"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:src="@drawable/night_path"/>
+        <ImageView
+            android:id="@+id/bike"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/bike" />
+    </FrameLayout>
 </LinearLayout>

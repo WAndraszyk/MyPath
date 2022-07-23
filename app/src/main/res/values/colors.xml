@@ -12,5 +12,8 @@
     <color name="blue_sky">#1e7ac7</color>
     <color name="sunset_sky">#ec8100</color>
     <color name="night_sky">#05192e</color>
-    <color name="sea">#224869</color>
+    <color name="ground">#4CAF50</color>
+    <color name="night_ground">#032004</color>
+    <color name="path">#B58949</color>
+    <color name="night_path">#3C3325</color>
 </resources>
