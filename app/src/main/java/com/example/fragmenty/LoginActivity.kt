@@ -2,15 +2,22 @@ package com.example.fragmenty
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import java.sql.DriverManager
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var nick: String
     private lateinit var password: String
     private var success = false
@@ -68,6 +75,26 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Wpisz prawidłowy nick i hasło!", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        if(sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) != null){
+            val lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensorManager.registerListener(this,lightSensor,SensorManager.SENSOR_DELAY_NORMAL)
+        }else Toast.makeText(this,"Light sensor not detected!",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        if (event.sensor?.type == Sensor.TYPE_LIGHT) {
+            if (event.values[0] < 40) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        return
     }
 
     override fun onStart() {
