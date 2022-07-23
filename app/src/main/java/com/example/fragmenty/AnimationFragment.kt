@@ -16,6 +16,10 @@ class AnimationFragment : Fragment() {
     private lateinit var mSceneView: View
     private lateinit var mSunView: View
     private lateinit var mSkyView: View
+    private lateinit var mGround: View
+    private lateinit var mPath: View
+    private lateinit var mBike: View
+    private lateinit var mTitle: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +32,10 @@ class AnimationFragment : Fragment() {
             mSceneView = view
             mSunView = view.findViewById(R.id.sun)
             mSkyView = view.findViewById(R.id.sky)
+            mGround = view.findViewById(R.id.ground)
+            mPath = view.findViewById(R.id.night_path)
+            mBike = view.findViewById(R.id.bike)
+            mTitle = view.findViewById(R.id.title)
         }
 
         return view
@@ -38,9 +46,14 @@ class AnimationFragment : Fragment() {
         val sunYStart = mSunView.top
         val sunYEnd = mSkyView.height
 
+        val bikeYStart = mGround.bottom
+        val bikeYEnd = mSkyView.top
+
         val mBlueSkyColor = resources.getColor(R.color.blue_sky)
         val mSunsetSkyColor = resources.getColor(R.color.sunset_sky)
         val mNightSkyColor = resources.getColor(R.color.night_sky)
+        val mGroundColor = resources.getColor(R.color.ground)
+        val mNightGroundColor = resources.getColor(R.color.night_ground)
 
         val heightAnimator = ObjectAnimator
             .ofFloat(mSunView, "y", sunYStart.toFloat(), sunYEnd.toFloat())
@@ -57,11 +70,31 @@ class AnimationFragment : Fragment() {
             .setDuration(1500)
         nightSkyAnimator.setEvaluator(ArgbEvaluator())
 
+        val nightGroundAnimator = ObjectAnimator
+            .ofInt(mGround, "backgroundColor", mGroundColor, mNightGroundColor)
+            .setDuration(1500)
+        nightGroundAnimator.setEvaluator(ArgbEvaluator())
+
+        val nightPathAnimator = ObjectAnimator
+            .ofFloat(mPath, "alpha", 0f, 1f)
+            .setDuration(1500)
+        nightGroundAnimator.setEvaluator(ArgbEvaluator())
+
+        val bikeAnimator = ObjectAnimator
+            .ofFloat(mBike, "y", bikeYStart.toFloat(), bikeYEnd.toFloat())
+            .setDuration(4000)
+        heightAnimator.interpolator = AccelerateInterpolator()
+
+        val titleAnimator = ObjectAnimator
+            .ofFloat(mTitle, "alpha", 0f, 1f)
+            .setDuration(700)
+        nightGroundAnimator.setEvaluator(ArgbEvaluator())
+
         val animatorSet = AnimatorSet()
-        animatorSet
-            .play(heightAnimator)
-            .with(sunsetSkyAnimator)
-            .before(nightSkyAnimator)
+        animatorSet.play(heightAnimator).with(sunsetSkyAnimator).with(bikeAnimator).before(nightSkyAnimator)
+        animatorSet.play(nightSkyAnimator).with(nightGroundAnimator).with(nightPathAnimator)
+        animatorSet.play(titleAnimator).after(nightSkyAnimator)
+
         animatorSet.start()
     }
 }
