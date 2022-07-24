@@ -2,14 +2,17 @@ package com.example.fragmenty
 
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources.Theme
 import android.graphics.drawable.ColorDrawable
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
@@ -30,7 +33,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         if((resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) < Configuration.SCREENLAYOUT_SIZE_LARGE) {
             val toolbar = findViewById<Toolbar>(R.id.toolbar)
             setSupportActionBar(toolbar)
-            supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.purple_500)))
+            val typedValue = TypedValue()
+            val theme: Theme = this.theme
+            theme.resolveAttribute(com.google.android.material.R.attr.colorPrimary, typedValue, true)
+            @ColorInt val color = typedValue.data
+            supportActionBar?.setBackgroundDrawable(ColorDrawable(color))
 
             val logOut = findViewById<ImageView>(R.id.logOutIcon)
             logOut.setOnClickListener{

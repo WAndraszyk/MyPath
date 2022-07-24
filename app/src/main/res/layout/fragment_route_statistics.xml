@@ -25,6 +25,7 @@
                 android:layout_height="match_parent"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:toolbarId="@id/toolbar"
+                app:collapsedTitleTextColor="?attr/colorOnPrimary"
                 app:contentScrim="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 app:expandedTitleMarginBottom="15dp"

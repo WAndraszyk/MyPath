@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/card_view"
     android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/purple_500"
+    app:cardBackgroundColor="?attr/colorPrimaryVariant"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp"
     app:contentPadding="4dp">
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_image"
             android:layout_marginTop="8dp"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="30sp"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>

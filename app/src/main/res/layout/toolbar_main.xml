@@ -8,7 +8,7 @@
     app:contentInsetStart="0dp"
     app:contentInsetStartWithNavigation="0dp"
     app:layout_collapseMode="pin"
-    app:titleTextColor="@color/white"
+    app:titleTextColor="?attr/colorOnPrimary"
     app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
     android:paddingStart="15dp"
     android:paddingEnd="15dp">

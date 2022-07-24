@@ -2,14 +2,17 @@ package com.example.fragmenty
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -33,7 +36,11 @@ class RouteDetailFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_route_detail, container, false)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        (activity as AppCompatActivity?)!!.supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.purple_500)))
+        val typedValue = TypedValue()
+        val theme: Resources.Theme? = activity?.theme
+        theme?.resolveAttribute(com.google.android.material.R.attr.colorPrimary, typedValue, true)
+        @ColorInt val color = typedValue.data
+        (activity as AppCompatActivity?)!!.supportActionBar?.setBackgroundDrawable(ColorDrawable(color))
 
         val logOut = view.findViewById<ImageView>(R.id.logOutIcon)
         logOut.setOnClickListener{
