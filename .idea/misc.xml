@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/ic_baseline_directions_bike_24.xml" value="0.131" />
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/ic_baseline_exit_to_app_24.xml" value="0.131" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/ic_baseline_timer_24.xml" value="0.1" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/night_path.xml" value="0.131" />
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/path.xml" value="0.131" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/drawable/sun.xml" value="0.1" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout-large/activity_main.xml" value="0.14343928280358598" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout-large/fragment_route_detail.xml" value="0.18" />
@@ -16,13 +20,13 @@
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/activity_statistics.xml" value="0.17630208333333333" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/card.xml" value="0.290956749672346" />
-        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_animation.xml" value="0.1" />
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_animation.xml" value="0.2" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_route_detail.xml" value="0.25" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_route_list.xml" value="0.1" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_route_statistics.xml" value="0.1" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_screen_slide_page.xml" value="0.25657298277425206" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_stoper.xml" value="0.1" />
-        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_tab1.xml" value="0.2" />
+        <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_tab1.xml" value="0.22" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_tab2.xml" value="0.28756476683937826" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/fragment_tab3.xml" value="0.3009833262077811" />
         <entry key="..\:/Studia/6 semestr/PAM/Fragmenty/app/src/main/res/layout/text.xml" value="0.2828649138712602" />

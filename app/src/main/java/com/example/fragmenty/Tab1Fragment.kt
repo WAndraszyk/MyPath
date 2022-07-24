@@ -47,6 +47,11 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
         search = view.findViewById(R.id.IVSearch)
         home = view.findViewById(R.id.Home)
 
+        val welcome = view.findViewById<TextView>(R.id.welcome)
+        val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+        val username = sharedScore?.getString("username", "")
+        welcome.text = "Welcome $username!"
+
         locationManager = activity?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if(ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
             && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
