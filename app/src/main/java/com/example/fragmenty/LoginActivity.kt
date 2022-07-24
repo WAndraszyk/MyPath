@@ -98,8 +98,6 @@ class LoginActivity : AppCompatActivity() {
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from users where nick = '$nick' and password = '$password';")
                 while(resultSet.next()){
-                    val update = connection.createStatement()
-                    update.executeUpdate("update users set is_logged_in = 1 where nick = '$nick';")
                     success = true
                 }
             }catch (e: Exception){
@@ -122,7 +120,7 @@ class LoginActivity : AppCompatActivity() {
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                statement.executeUpdate("insert into users values('$nick', '$password', 1);")
+                statement.executeUpdate("insert into users values('$nick', '$password');")
                 success = true
             }catch (e: Exception){
                 error = e.toString()
@@ -149,8 +147,6 @@ class LoginActivity : AppCompatActivity() {
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from users where nick = '$username';")
                 while(resultSet.next()){
-                    val update = connection.createStatement()
-                    update.executeUpdate("update users set is_logged_in = 0 where nick = '$username';")
                     val edit = sharedScore.edit()
                     edit.putString("username", "")
                     edit.apply()
