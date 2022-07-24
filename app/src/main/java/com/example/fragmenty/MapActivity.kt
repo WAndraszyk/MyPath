@@ -45,9 +45,9 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
 
         path =
             listOf(
+                LatLng(41.385064,2.173403),
                 LatLng(41.648823,-0.889085),
-                LatLng(40.416775,-3.70379),
-                LatLng(41.385064,2.173403))
+                LatLng(40.416775,-3.70379))
 
      binding = ActivityMapBinding.inflate(layoutInflater)
      setContentView(binding.root)
@@ -104,13 +104,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         val strDest = "destination=" + dest.latitude + "," + dest.longitude
         val sensor = "sensor=false"
         var waypoints = ""
-        for (i in 2 until path.size) {
+        for (i in 1 until path.size) {
             val point = path[i]
-            if (i == 2) waypoints = "waypoints="
-            waypoints += point.latitude.toString() + "," + point.longitude + "|"
+            if (point == dest) break
+
+            if (i == 1) waypoints = "waypoints="
+
+            waypoints += point.latitude.toString() + "," + point.longitude
+            if (i < path.size-1) waypoints += "|"
         }
-        val parameters = "$strOrigin&$strDest&$sensor&$waypoints"
+        val key = "key=AIzaSyAbEFjkjnSmgej_CqAasJkH_YCmgufFORs"
+        val parameters = "$strOrigin&$strDest&$sensor&$waypoints&$key"
         val output = "json"
+        Log.d("URL",parameters)
         return "https://maps.googleapis.com/maps/api/directions/${output}?${parameters}"
     }
 
@@ -151,6 +157,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
             } catch (e: java.lang.Exception) {
                 Log.d("Background Task", e.toString())
             }
+            Log.d("data", data)
             return data
         }
 
