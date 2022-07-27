@@ -12,7 +12,9 @@ import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
@@ -32,22 +34,22 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import java.sql.DriverManager
 
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationListener
 
+    private lateinit var mMapFragment: SupportMapFragment
+    private lateinit var mLoading: ProgressBar
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapBinding
-    private lateinit var path: List<LatLng>
+    private lateinit var mPath: MutableList<LatLng>
+    private lateinit var mNames: MutableList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        path =
-            listOf(
-                LatLng(41.385064,2.173403),
-                LatLng(41.648823,-0.889085),
-                LatLng(40.416775,-3.70379))
+        val db = DBHelper()
+        val exe = db.execute().get()
 
      binding = ActivityMapBinding.inflate(layoutInflater)
      setContentView(binding.root)
@@ -58,28 +60,26 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         mapFragment.getMapAsync(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-//        val path: List<LatLng> = ArrayList()
+        mLoading = this.findViewById(R.id.MapLoading)
 
-        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
+        mMapFragment =
+            supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
-        for(point in path)
+        mMapFragment.view?.visibility = View.GONE
+
+        val origin: LatLng = mPath[0]
+        val dest: LatLng = mPath.last()
+        val url = getDirectionsUrl(origin, dest)
+        val downloadTask = DownloadTask()
+        downloadTask.execute(url)
+
+        for(i in 0 until mPath.size)
         {
-            val pointName = "test"
-            mMap.addMarker(MarkerOptions().position(point).title(pointName))
+            mMap.addMarker(MarkerOptions().position(mPath[i]).title(mNames[i]))
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(path[0]))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mPath[0]))
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -91,12 +91,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         ) {
             mMap.isMyLocationEnabled = true
         }
-
-        val origin: LatLng = path[0]
-        val dest: LatLng = path.last()
-        val url = getDirectionsUrl(origin, dest)
-        val downloadTask = DownloadTask()
-        downloadTask.execute(url)
     }
 
     private fun getDirectionsUrl(origin: LatLng, dest: LatLng): String {
@@ -104,14 +98,14 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         val strDest = "destination=" + dest.latitude + "," + dest.longitude
         val sensor = "sensor=false"
         var waypoints = ""
-        for (i in 1 until path.size) {
-            val point = path[i]
+        for (i in 1 until mPath.size) {
+            val point = mPath[i]
             if (point == dest) break
 
             if (i == 1) waypoints = "waypoints="
 
             waypoints += point.latitude.toString() + "," + point.longitude
-            if (i < path.size-1) waypoints += "|"
+            if (i < mPath.size-2) waypoints += "|"
         }
         val key = "key=AIzaSyAbEFjkjnSmgej_CqAasJkH_YCmgufFORs"
         val parameters = "$strOrigin&$strDest&$sensor&$waypoints&$key"
@@ -148,6 +142,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         return data
     }
 
+    @SuppressLint("StaticFieldLeak")
     inner class DownloadTask : AsyncTask<String?, Void?, String>() {
 
         override fun doInBackground(vararg url: String?): String {
@@ -192,23 +187,23 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
             val points: ArrayList<LatLng> = ArrayList()
             val lineOptions = PolylineOptions()
             if (result != null) {
-                for (i in result.indices) {
-                    val path = result[i]
-                    for (j in path.indices) {
-                        val point = path[j]
-                        val lat = point["lat"]!!.toDouble()
-                        val lng = point["lng"]!!.toDouble()
-                        val position = LatLng(lat, lng)
-                        points.add(position)
-                    }
+                val path = result[0]
+                for (j in path.indices) {
+                    val point = path[j]
+                    val lat = point["lat"]!!.toDouble()
+                    val lng = point["lng"]!!.toDouble()
+                    val position = LatLng(lat, lng)
+                    points.add(position)
                 }
             }
             lineOptions.addAll(points)
             lineOptions.width(12f)
-            lineOptions.color(Color.RED)
+            lineOptions.color(Color.BLUE)
 
             // Drawing polyline in the Google Map for the entire route
             mMap.addPolyline(lineOptions)
+            mLoading.visibility = View.GONE
+            mMapFragment.view?.visibility = View.VISIBLE
         }
 
         inner class DirectionsJSONParser {
@@ -277,6 +272,38 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
                 }
                 return poly
             }
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    inner class DBHelper : AsyncTask<Void, Void, Void>() {
+        private var error = ""
+
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg p0: Void?): Void? {
+            try{
+                val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
+                val routeId = sharedScore?.getInt("id", -1)
+
+                Class.forName("com.mysql.jdbc.Driver").newInstance()
+                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val connection = DriverManager.getConnection(url, "root","haslo")
+                val statement = connection.createStatement()
+                val resultSet = statement.executeQuery("select * from points where route_id = $routeId order by point_no;")
+                while(resultSet.next()){
+                    val name = resultSet.getString(3)
+                    val latitude = resultSet.getDouble(4)
+                    val longitude = resultSet.getDouble(5)
+                    mPath.add(LatLng(latitude, longitude));
+                    mNames.add(name);
+                }
+
+            }catch (e: Exception){
+                error = e.toString()
+                println("----------------DATABASE ERROR: $error--------------")
+            }
+
+            return null
         }
     }
 }
