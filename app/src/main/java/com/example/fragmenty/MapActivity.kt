@@ -4,25 +4,25 @@ package com.example.fragmenty
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.example.fragmenty.databinding.ActivityMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
@@ -37,7 +37,7 @@ import java.net.URL
 import java.sql.DriverManager
 
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationListener
+class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener {   // , LocationListener
 
     private lateinit var mMapFragment: SupportMapFragment
     private lateinit var mLoading: ProgressBar
@@ -45,6 +45,19 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
     private lateinit var binding: ActivityMapBinding
     private var mPath = mutableListOf<LatLng>()
     private var mNames = mutableListOf<String>()
+
+    private lateinit var sensorManager: SensorManager
+    private lateinit var gsensor: Sensor
+    private lateinit var msensor: Sensor
+
+    private val mGravity = FloatArray(3)
+    private val mGeomagnetic = FloatArray(3)
+    private val arrR = FloatArray(9)
+    private val arrI = FloatArray(9)
+
+    private var azimuth = 0f
+    private val azimuthFix = 0f
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +77,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         mMap = googleMap
         mLoading = this.findViewById(R.id.MapLoading)
 
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        gsensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        msensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+
+        sensorManager.registerListener(this, gsensor,
+            SensorManager.SENSOR_DELAY_GAME)
+        sensorManager.registerListener(this, msensor,
+            SensorManager.SENSOR_DELAY_GAME)
+
         mMapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
@@ -79,8 +102,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         var avgLong = .0
         for(i in 0 until mPath.size)
         {
-            avgLat += mPath[0].latitude
-            avgLong += mPath[0].longitude
+            avgLat += mPath[i].latitude
+            avgLong += mPath[i].longitude
             if(mNames[i] != "")
                 mMap.addMarker(MarkerOptions().position(mPath[i]).title(mNames[i]))
         }
@@ -303,8 +326,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
                     val name = resultSet.getString(3)
                     val latitude = resultSet.getDouble(4)
                     val longitude = resultSet.getDouble(5)
-                    mPath.add(LatLng(latitude, longitude));
-                    mNames.add(name);
+                    mPath.add(LatLng(latitude, longitude))
+                    mNames.add(name)
                 }
 
             }catch (e: Exception){
@@ -314,5 +337,48 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
 
             return null
         }
+    }
+
+    fun UpdateBearing(){
+        val cameraPosition = CameraPosition.Builder().target(mMap.cameraPosition.target).bearing(azimuth).build()
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        val alpha = 0.97f
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+            mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0]
+            mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1]
+            mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2]
+
+            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
+            if (success) {
+                val orientation = FloatArray(3)
+                SensorManager.getOrientation(arrR, orientation)
+                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
+                azimuth = (azimuth + azimuthFix + 360) % 360
+
+                UpdateBearing()
+            }
+        }
+        if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+            mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0]
+            mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1]
+            mGeomagnetic[2] = alpha * mGeomagnetic[2] + (1 - alpha) * event.values[2]
+
+            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
+            if (success) {
+                val orientation = FloatArray(3)
+                SensorManager.getOrientation(arrR, orientation)
+                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
+                azimuth = (azimuth + azimuthFix + 360) % 360
+
+                UpdateBearing()
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+        return
     }
 }
