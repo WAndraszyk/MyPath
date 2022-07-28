@@ -25,11 +25,12 @@ DROP TABLE IF EXISTS `routes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `routes` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL DEFAULT '',
   `way` varchar(1000) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`name`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -39,7 +40,13 @@ CREATE TABLE `routes` (
 
 LOCK TABLES `routes` WRITE;
 /*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES ('Bicycle Ring of the Poznan Powiat','The bicycle route around Poznan with seven connecting routes leading to it from the city center was conceived as a network of tourist routes. The route passes through interesting regions (Wielkopolski National Park, Puszcza Zielonka Landscape Park, Promno Landscape Park, Rogalinski Landscape Park and the most famous towns in the vicinity of the capital of Wielkopolska). The trail goes through Kornik, Rogalin, Steszew, Biedrusko, and Kostrzyn. The route runs through the military training ground in Biedrusko, access to which is possible after obtaining a pass. You can also take a detour.','ring','bicycle'),('Citadel Park','Walking tour through Citadel Park in Poznan\nThere are two museums in the park - the \"Poznan\" Army Museum and the Armaments Museum. Near the Monument to the Heroes, there is a monument to the Marshal of the Soviet Union, Vasily Chuikov (1900-82), the commander of the 8th Guards Army, whose troops stormed the Citadel in 1945, unveiled in 1982.','cytadela','walking'),('Gniezno - Poznan around Malta lake','From Gniezno along the S5 via the service station to Lubow and Kostrzyn, then along the old 2 and from Jasin by the pavement, in Antonin near VW via the underground passage to Leszka street, a kilometer through the forest and you are there! Add 50 km to return to Gniezno the same way','malta','bicycle'),('Morasko Meteorite Reserve','The route starts from the forest parking lot towards the north to the meteorite craters. The beginning of the educational path. Natural Monument. Craters. Elm and autumn riparian forests. Former forester\'s lodge. Former gravel pit. Morasko Mountain. Peatbog. Cold Water. End of the educational path. END - Forest parking.','morasko','walking'),('Poznan two castles','Walking tour to the Royal Castle and the Imperial Castle in Poznan.\nThe Royal Castle in Poznan is the oldest surviving royal residence in Poland. The building was erected on Przemysla Hill in the 13th century, first as a residential tower for Przemysl I, and later expanded by his son Przemysl II - the first king of Poland after the division into districts. The death of Przemysl II prevented the completion of the work, it was only in the 14th century that Casimir the Great did it, during which the castle became the largest secular building in Europe at that time.\nThe Imperial Castle is the last and youngest royal residence in Europe. It was built for the German Emperor Wilhelm II, designed by Franz Schwechten in 1905-1910. It was erected on the model of medieval castles - as a symbol of German rule in Greater Poland.','castle','walking'),('Rusalka-Strzeszyn-Kiekrz','The route is mainly intended for amateurs of Sunday rides. Most of the route runs through forests and their edges. \nThe road is mostly compacted gravel or black earth, \nonly in the vicinity of Lake Kierskie we have asphalt, \nbut there is no car traffic (there are posts blocking the \nentrances). The greatest difficulty may be Sunday strollers \nwith children walking along the entire width of the paths \n(who are rarely led by the hand - sections to Rusalka and \nStrzeszyn) and the crossing of ul. Lutycka (Poznan bypass) - \nwe will cross it twice.','rusalka','bicycle');
+INSERT INTO `routes` VALUES 
+(0,'Bicycle Ring of the Poznan Powiat','The bicycle route around Poznan with seven connecting routes leading to it from the city center was conceived as a network of tourist routes. The route passes through interesting regions (Wielkopolski National Park, Puszcza Zielonka Landscape Park, Promno Landscape Park, Rogalinski Landscape Park and the most famous towns in the vicinity of the capital of Wielkopolska). The trail goes through Kornik, Rogalin, Steszew, Biedrusko, and Kostrzyn. The route runs through the military training ground in Biedrusko, access to which is possible after obtaining a pass. You can also take a detour.','ring','bicycle'),
+(1,'Citadel Park','Walking tour through Citadel Park in Poznan\nThere are two museums in the park - the \"Poznan\" Army Museum and the Armaments Museum. Near the Monument to the Heroes, there is a monument to the Marshal of the Soviet Union, Vasily Chuikov (1900-82), the commander of the 8th Guards Army, whose troops stormed the Citadel in 1945, unveiled in 1982.','cytadela','walking'),
+(2,'Gniezno - Poznan around Malta lake','From Gniezno along the S5 via the service station to Lubow and Kostrzyn, then along the old 2 and from Jasin by the pavement, in Antonin near VW via the underground passage to Leszka street, a kilometer through the forest and you are there! Add 50 km to return to Gniezno the same way','malta','bicycle'),
+(3,'Morasko Meteorite Reserve','The route starts from the forest parking lot towards the north to the meteorite craters. The beginning of the educational path. Natural Monument. Craters. Elm and autumn riparian forests. Former forester\'s lodge. Former gravel pit. Morasko Mountain. Peatbog. Cold Water. End of the educational path. END - Forest parking.','morasko','walking'),
+(4,'Poznan two castles','Walking tour to the Royal Castle and the Imperial Castle in Poznan.\nThe Royal Castle in Poznan is the oldest surviving royal residence in Poland. The building was erected on Przemysla Hill in the 13th century, first as a residential tower for Przemysl I, and later expanded by his son Przemysl II - the first king of Poland after the division into districts. The death of Przemysl II prevented the completion of the work, it was only in the 14th century that Casimir the Great did it, during which the castle became the largest secular building in Europe at that time.\nThe Imperial Castle is the last and youngest royal residence in Europe. It was built for the German Emperor Wilhelm II, designed by Franz Schwechten in 1905-1910. It was erected on the model of medieval castles - as a symbol of German rule in Greater Poland.','castle','walking'),
+(5,'Rusalka-Strzeszyn-Kiekrz','The route is mainly intended for amateurs of Sunday rides. Most of the route runs through forests and their edges. \nThe road is mostly compacted gravel or black earth, \nonly in the vicinity of Lake Kierskie we have asphalt, \nbut there is no car traffic (there are posts blocking the \nentrances). The greatest difficulty may be Sunday strollers \nwith children walking along the entire width of the paths \n(who are rarely led by the hand - sections to Rusalka and \nStrzeszyn) and the crossing of ul. Lutycka (Poznan bypass) - \nwe will cross it twice.','rusalka','bicycle');
 /*!40000 ALTER TABLE `routes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,10 +60,10 @@ DROP TABLE IF EXISTS `routes_times`;
 CREATE TABLE `routes_times` (
   `date` datetime DEFAULT NULL,
   `score` time DEFAULT NULL,
-  `route` varchar(50) DEFAULT NULL,
+  `route_id` int DEFAULT NULL,
   `user` varchar(30) DEFAULT NULL,
-  KEY `route` (`route`),
-  CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route`) REFERENCES `routes` (`name`) ON DELETE CASCADE
+  KEY `route_id` (`route_id`),
+  CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -66,7 +73,9 @@ CREATE TABLE `routes_times` (
 
 LOCK TABLES `routes_times` WRITE;
 /*!40000 ALTER TABLE `routes_times` DISABLE KEYS */;
-INSERT INTO `routes_times` VALUES ('2022-07-09 09:19:13','00:00:03','Bicycle Ring of the Poznan Powiat','Witold'),('2022-07-09 09:19:32','00:00:05','Bicycle Ring of the Poznan Powiat','Witold');
+INSERT INTO `routes_times` VALUES 
+('2022-07-09 09:19:13','00:00:03',0,'Witold'),
+('2022-07-09 09:19:32','00:00:05',0,'Witold');
 /*!40000 ALTER TABLE `routes_times` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +89,6 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `nick` varchar(30) NOT NULL,
   `password` varchar(30) DEFAULT NULL,
-  `is_logged_in` int(11) DEFAULT NULL,
   PRIMARY KEY (`nick`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -91,8 +99,68 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('Tomasz','haslo',0),('Witold','haslo',1);
+INSERT INTO `users` VALUES ('Tomasz','haslo'),('Witold','haslo');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `points`
+--
+
+DROP TABLE IF EXISTS `points`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `points` (
+  `route_id`   int NOT NULL,
+  `point_no`   int NOT NULL,
+  `point_name` varchar(30) DEFAULT NULL,
+  `latitude`   decimal(18, 15) DEFAULT NULL,
+  `longitude`  decimal(18, 15) DEFAULT NULL,
+  PRIMARY KEY (`route_id`, `point_no`),
+  CONSTRAINT `points_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `points`
+--
+
+LOCK TABLES `points` WRITE;
+/*!40000 ALTER TABLE `points` DISABLE KEYS */;
+INSERT INTO `points` VALUES 
+(0, 0, 'Kornik', 52.26248698294555, 17.089942850321115),
+(0, 1, 'Rogalin', 52.23441508631901, 16.936700242056556),
+(0, 2, 'Steszew', 52.283918489198925, 16.700999380428815),
+(0, 3, 'Biedrusko', 52.54391343418845, 16.94676965688554),
+(0, 4, 'Kostrzyn', 52.39796870679422, 17.228036352509225),
+(0, 5, '', 52.26248698294555, 17.089942850321115),
+
+(1, 0, 'Army Museum', 52.417447243581385, 16.93302899147617),
+(1, 1, 'Armaments Museum', 52.42051606574886, 16.93301826266702),
+
+(2, 0, 'Gniezno', 52.61513650573223, 17.586395188350227),
+(2, 1, 'Lubowo', 52.51078546324974, 17.446319499942902),
+(2, 2, 'Kostrzyn', 52.397807365462526, 17.222473056703755),
+(2, 3, 'Jasin', 52.40534825731, 17.099048529358466),
+(2, 4, 'Antoninek', 52.40970447614781, 17.02813752872536),
+(2, 5, '', 52.40062603268367, 17.017011725551306),
+(2, 6, 'Malta', 52.404645127044624, 16.976649844092435),
+
+(3, 0, 'Parking lot', 52.48790294786534, 16.897841836051242),
+(3, 1, 'Craters', 52.49002485758467, 16.896048733786568),
+(3, 2, '', 52.49012117406549, 16.890477802446938),
+(3, 3, '', 52.48630651695445, 16.8906587549638),
+(3, 5, 'Morasko mountain', 52.48468628091101, 16.89331515173527),
+(3, 6, 'Cold Water Lake', 52.48181141345043, 16.89608319153376),
+
+(4, 0, 'Royal Castle', 52.409317788800784, 16.93105642708356),
+(4, 1, 'Imperial Castle', 52.408968529838106, 16.91947487388079),
+
+(5, 0, 'Rusalka', 52.42904435886563, 16.876823563776455),
+(5, 1, 'Strzeszyn', 52.46328743400082, 16.82581858504847),
+(5, 2, 'Kiekrz', 52.473965635937375, 16.783705624781632);
+
+/*!40000 ALTER TABLE `points` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -55,6 +55,14 @@ class RouteDetailFragment : Fragment() {
             val intent = Intent(requireContext(), StatisticsActivity()::class.java)
             startActivity(intent)
         }
+
+        val map = view.findViewById<FloatingActionButton>(R.id.mapfab)
+
+        map.setOnClickListener(){
+            val intent = Intent(requireContext(), MapActivity()::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent)
+        }
         return view
     }
 
