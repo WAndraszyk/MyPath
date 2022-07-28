@@ -40,31 +40,35 @@
             android:layout_height="wrap_content"
             android:text="@string/placeholder" />
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:orientation="vertical">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mapfab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:contentDescription="@string/fab_descritpion"
             android:src="@android:drawable/ic_menu_mylocation"
-            app:backgroundTint="@color/purple_500"
+            app:backgroundTint="?attr/colorPrimaryVariant"
             app:fabSize="normal"
-            app:tint="@color/white" />
-
+            app:tint="?attr/colorOnPrimary" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fab"
+            app:fabSize="normal"
+            app:tint="?attr/colorOnPrimary"
+            app:backgroundTint="?attr/colorPrimaryVariant"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_timer"
+            android:contentDescription="@string/fab_descritpion" />
     </LinearLayout>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:layout_gravity="end|bottom"
-        app:fabSize="normal"
-        app:tint="?attr/colorOnPrimary"
-        app:backgroundTint="?attr/colorPrimaryVariant"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/ic_timer"
-        android:contentDescription="@string/fab_descritpion" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
