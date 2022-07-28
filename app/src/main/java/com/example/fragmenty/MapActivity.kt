@@ -43,8 +43,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
     private lateinit var mLoading: ProgressBar
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapBinding
-    private lateinit var mPath: MutableList<LatLng>
-    private lateinit var mNames: MutableList<String>
+    private var mPath = mutableListOf<LatLng>()
+    private var mNames = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +75,20 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         val downloadTask = DownloadTask()
         downloadTask.execute(url)
 
+        var avgLat = .0
+        var avgLong = .0
         for(i in 0 until mPath.size)
         {
-            mMap.addMarker(MarkerOptions().position(mPath[i]).title(mNames[i]))
+            avgLat += mPath[0].latitude
+            avgLong += mPath[0].longitude
+            if(mNames[i] != "")
+                mMap.addMarker(MarkerOptions().position(mPath[i]).title(mNames[i]))
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mPath[0]))
+        avgLat /= mPath.size
+        avgLong /= mPath.size
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+            LatLng(avgLat, avgLong), 10F))
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -283,7 +292,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {   // , LocationLis
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
                 val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
-                val routeId = sharedScore?.getInt("id", -1)
+                val routeId = sharedScore?.getInt("route_id", -1)
 
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
                 val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"

@@ -97,11 +97,12 @@ class Tab2Fragment : Fragment(R.layout.fragment_tab2) {
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from routes where type = 'bicycle';")
                 while(resultSet.next()){
-                    val name = resultSet.getString(1)
-                    val way = resultSet.getString(2)
-                    val image = resultSet.getString(3)
-                    val type = resultSet.getString(4)
-                    routes.add(Route(name, way, image, type))
+                    val route_id = resultSet.getInt(1)
+                    val name = resultSet.getString(2)
+                    val way = resultSet.getString(3)
+                    val image = resultSet.getString(4)
+                    val type = resultSet.getString(5)
+                    routes.add(Route(route_id, name, way, image, type))
                 }
             }catch (e: Exception){
                 error = e.toString()

@@ -25,6 +25,7 @@ class RouteDetailFragment : Fragment() {
     private var name = ""
     private var way = ""
     private var image = ""
+    private var route_id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,20 +95,23 @@ class RouteDetailFragment : Fragment() {
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from routes order by type, name;")
                 while(resultSet.next()){
-                    val name = resultSet.getString(1)
-                    val way = resultSet.getString(2)
-                    val image = resultSet.getString(3)
-                    val type = resultSet.getString(4)
-                    routes.add(Route(name, way, image, type))
+                    val route_id = resultSet.getInt(1)
+                    val name = resultSet.getString(2)
+                    val way = resultSet.getString(3)
+                    val image = resultSet.getString(4)
+                    val type = resultSet.getString(5)
+                    routes.add(Route(route_id, name, way, image, type))
                 }
 
                 val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
                 val routeId = sharedScore?.getInt("id", -1)
                 val route = routes[routeId!!]
+                route_id = route.getRouteId()
                 name = route.getName()
                 way = route.getWay()
                 image = route.getImage()
                 val edit = sharedScore.edit()
+                edit.putInt("route_id", route_id)
                 edit.putString("name", name)
                 edit.apply()
             }catch (e: Exception){
