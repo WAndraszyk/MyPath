@@ -18,6 +18,32 @@ USE `fragmenty`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `routes`
+--
+
+DROP TABLE IF EXISTS `routes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `routes` (
+  `id` int(11) NOT NULL PRIMARY KEY,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `way` varchar(1000) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `routes`
+--
+
+LOCK TABLES `routes` WRITE;
+/*!40000 ALTER TABLE `routes` DISABLE KEYS */;
+INSERT INTO `routes` VALUES (0,'Bicycle Ring of the Poznan Powiat','The bicycle route around Poznan with seven connecting routes leading to it from the city center was conceived as a network of tourist routes. The route passes through interesting regions (Wielkopolski National Park, Puszcza Zielonka Landscape Park, Promno Landscape Park, Rogalinski Landscape Park and the most famous towns in the vicinity of the capital of Wielkopolska). The trail goes through Kornik, Rogalin, Steszew, Biedrusko, and Kostrzyn. The route runs through the military training ground in Biedrusko, access to which is possible after obtaining a pass. You can also take a detour.','ring','bicycle'),(1,'Citadel Park','Walking tour through Citadel Park in Poznan\nThere are two museums in the park - the \"Poznan\" Army Museum and the Armaments Museum. Near the Monument to the Heroes, there is a monument to the Marshal of the Soviet Union, Vasily Chuikov (1900-82), the commander of the 8th Guards Army, whose troops stormed the Citadel in 1945, unveiled in 1982.','cytadela','walking'),(2,'Gniezno - Poznan around Malta lake','From Gniezno along the S5 via the service station to Lubow and Kostrzyn, then along the old 2 and from Jasin by the pavement, in Antonin near VW via the underground passage to Leszka street, a kilometer through the forest and you are there! Add 50 km to return to Gniezno the same way','malta','bicycle'),(3,'Morasko Meteorite Reserve','The route starts from the forest parking lot towards the north to the meteorite craters. The beginning of the educational path. Natural Monument. Craters. Elm and autumn riparian forests. Former forester\'s lodge. Former gravel pit. Morasko Mountain. Peatbog. Cold Water. End of the educational path. END - Forest parking.','morasko','walking'),(4,'Poznan two castles','Walking tour to the Royal Castle and the Imperial Castle in Poznan.\nThe Royal Castle in Poznan is the oldest surviving royal residence in Poland. The building was erected on Przemysla Hill in the 13th century, first as a residential tower for Przemysl I, and later expanded by his son Przemysl II - the first king of Poland after the division into districts. The death of Przemysl II prevented the completion of the work, it was only in the 14th century that Casimir the Great did it, during which the castle became the largest secular building in Europe at that time.\nThe Imperial Castle is the last and youngest royal residence in Europe. It was built for the German Emperor Wilhelm II, designed by Franz Schwechten in 1905-1910. It was erected on the model of medieval castles - as a symbol of German rule in Greater Poland.','castle','walking'),(5,'Rusalka-Strzeszyn-Kiekrz','The route is mainly intended for amateurs of Sunday rides. Most of the route runs through forests and their edges. \nThe road is mostly compacted gravel or black earth, \nonly in the vicinity of Lake Kierskie we have asphalt, \nbut there is no car traffic (there are posts blocking the \nentrances). The greatest difficulty may be Sunday strollers \nwith children walking along the entire width of the paths \n(who are rarely led by the hand - sections to Rusalka and \nStrzeszyn) and the crossing of ul. Lutycka (Poznan bypass) - \nwe will cross it twice.','rusalka','bicycle');
+/*!40000 ALTER TABLE `routes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `points`
 --
 
@@ -46,33 +72,6 @@ INSERT INTO `points` VALUES (0,0,'Kornik',52.262486982945550,17.089942850321115)
 UNLOCK TABLES;
 
 --
--- Table structure for table `routes`
---
-
-DROP TABLE IF EXISTS `routes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `routes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '',
-  `way` varchar(1000) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `routes`
---
-
-LOCK TABLES `routes` WRITE;
-/*!40000 ALTER TABLE `routes` DISABLE KEYS */;
-INSERT INTO `routes` VALUES (0,'Bicycle Ring of the Poznan Powiat','The bicycle route around Poznan with seven connecting routes leading to it from the city center was conceived as a network of tourist routes. The route passes through interesting regions (Wielkopolski National Park, Puszcza Zielonka Landscape Park, Promno Landscape Park, Rogalinski Landscape Park and the most famous towns in the vicinity of the capital of Wielkopolska). The trail goes through Kornik, Rogalin, Steszew, Biedrusko, and Kostrzyn. The route runs through the military training ground in Biedrusko, access to which is possible after obtaining a pass. You can also take a detour.','ring','bicycle'),(1,'Citadel Park','Walking tour through Citadel Park in Poznan\nThere are two museums in the park - the \"Poznan\" Army Museum and the Armaments Museum. Near the Monument to the Heroes, there is a monument to the Marshal of the Soviet Union, Vasily Chuikov (1900-82), the commander of the 8th Guards Army, whose troops stormed the Citadel in 1945, unveiled in 1982.','cytadela','walking'),(2,'Gniezno - Poznan around Malta lake','From Gniezno along the S5 via the service station to Lubow and Kostrzyn, then along the old 2 and from Jasin by the pavement, in Antonin near VW via the underground passage to Leszka street, a kilometer through the forest and you are there! Add 50 km to return to Gniezno the same way','malta','bicycle'),(3,'Morasko Meteorite Reserve','The route starts from the forest parking lot towards the north to the meteorite craters. The beginning of the educational path. Natural Monument. Craters. Elm and autumn riparian forests. Former forester\'s lodge. Former gravel pit. Morasko Mountain. Peatbog. Cold Water. End of the educational path. END - Forest parking.','morasko','walking'),(4,'Poznan two castles','Walking tour to the Royal Castle and the Imperial Castle in Poznan.\nThe Royal Castle in Poznan is the oldest surviving royal residence in Poland. The building was erected on Przemysla Hill in the 13th century, first as a residential tower for Przemysl I, and later expanded by his son Przemysl II - the first king of Poland after the division into districts. The death of Przemysl II prevented the completion of the work, it was only in the 14th century that Casimir the Great did it, during which the castle became the largest secular building in Europe at that time.\nThe Imperial Castle is the last and youngest royal residence in Europe. It was built for the German Emperor Wilhelm II, designed by Franz Schwechten in 1905-1910. It was erected on the model of medieval castles - as a symbol of German rule in Greater Poland.','castle','walking'),(5,'Rusalka-Strzeszyn-Kiekrz','The route is mainly intended for amateurs of Sunday rides. Most of the route runs through forests and their edges. \nThe road is mostly compacted gravel or black earth, \nonly in the vicinity of Lake Kierskie we have asphalt, \nbut there is no car traffic (there are posts blocking the \nentrances). The greatest difficulty may be Sunday strollers \nwith children walking along the entire width of the paths \n(who are rarely led by the hand - sections to Rusalka and \nStrzeszyn) and the crossing of ul. Lutycka (Poznan bypass) - \nwe will cross it twice.','rusalka','bicycle');
-/*!40000 ALTER TABLE `routes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `routes_times`
 --
 
@@ -82,7 +81,7 @@ DROP TABLE IF EXISTS `routes_times`;
 CREATE TABLE `routes_times` (
   `date` datetime DEFAULT NULL,
   `score` time DEFAULT NULL,
-  `route_id` int(11) DEFAULT NULL,
+  `route_id` int(11) NOT NULL,
   `user` varchar(30) DEFAULT NULL,
   KEY `route_id` (`route_id`),
   CONSTRAINT `routes_times_ibfk_1` FOREIGN KEY (`route_id`) REFERENCES `routes` (`id`) ON DELETE CASCADE
