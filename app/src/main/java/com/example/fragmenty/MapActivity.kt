@@ -37,7 +37,7 @@ import java.net.URL
 import java.sql.DriverManager
 
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener {   // , LocationListener
+class MapActivity : AppCompatActivity(), OnMapReadyCallback /*, SensorEventListener */ {   // , LocationListener
 
     private lateinit var mMapFragment: SupportMapFragment
     private lateinit var mLoading: ProgressBar
@@ -46,17 +46,17 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener
     private var mPath = mutableListOf<LatLng>()
     private var mNames = mutableListOf<String>()
 
-    private lateinit var sensorManager: SensorManager
-    private lateinit var gsensor: Sensor
-    private lateinit var msensor: Sensor
-
-    private val mGravity = FloatArray(3)
-    private val mGeomagnetic = FloatArray(3)
-    private val arrR = FloatArray(9)
-    private val arrI = FloatArray(9)
-
-    private var azimuth = 0f
-    private val azimuthFix = 0f
+//    private lateinit var sensorManager: SensorManager
+//    private lateinit var gsensor: Sensor
+//    private lateinit var msensor: Sensor
+//
+//    private val mGravity = FloatArray(3)
+//    private val mGeomagnetic = FloatArray(3)
+//    private val arrR = FloatArray(9)
+//    private val arrI = FloatArray(9)
+//
+//    private var azimuth = 0f
+//    private val azimuthFix = 0f
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,16 +76,16 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         mLoading = this.findViewById(R.id.MapLoading)
-
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-
-        gsensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-        msensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
-
-        sensorManager.registerListener(this, gsensor,
-            SensorManager.SENSOR_DELAY_GAME)
-        sensorManager.registerListener(this, msensor,
-            SensorManager.SENSOR_DELAY_GAME)
+//
+//        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+//
+//        gsensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+//        msensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+//
+//        sensorManager.registerListener(this, gsensor,
+//            SensorManager.SENSOR_DELAY_GAME)
+//        sensorManager.registerListener(this, msensor,
+//            SensorManager.SENSOR_DELAY_GAME)
 
         mMapFragment =
             supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -339,46 +339,46 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener
         }
     }
 
-    fun UpdateBearing(){
-        val cameraPosition = CameraPosition.Builder().target(mMap.cameraPosition.target).bearing(azimuth).build()
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-    }
+//    fun UpdateBearing(){
+//        val cameraPosition = CameraPosition.Builder()
+//            .target(mMap.cameraPosition.target)
+//            .bearing(azimuth)
+//            .zoom(mMap.cameraPosition.zoom)
+//            .build()
+//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+//    }
 
-    override fun onSensorChanged(event: SensorEvent) {
-        val alpha = 0.97f
-        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0]
-            mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1]
-            mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2]
-
-            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
-            if (success) {
-                val orientation = FloatArray(3)
-                SensorManager.getOrientation(arrR, orientation)
-                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
-                azimuth = (azimuth + azimuthFix + 360) % 360
-
-                UpdateBearing()
-            }
-        }
-        if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
-            mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0]
-            mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1]
-            mGeomagnetic[2] = alpha * mGeomagnetic[2] + (1 - alpha) * event.values[2]
-
-            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
-            if (success) {
-                val orientation = FloatArray(3)
-                SensorManager.getOrientation(arrR, orientation)
-                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
-                azimuth = (azimuth + azimuthFix + 360) % 360
-
-                UpdateBearing()
-            }
-        }
-    }
-
-    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
-        return
-    }
+//    override fun onSensorChanged(event: SensorEvent) {
+//        val alpha = 0.97f
+//        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+//            mGravity[0] = alpha * mGravity[0] + (1 - alpha) * event.values[0]
+//            mGravity[1] = alpha * mGravity[1] + (1 - alpha) * event.values[1]
+//            mGravity[2] = alpha * mGravity[2] + (1 - alpha) * event.values[2]
+//
+//            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
+//            if (success) {
+//                val orientation = FloatArray(3)
+//                SensorManager.getOrientation(arrR, orientation)
+//                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
+//                azimuth = (azimuth + azimuthFix + 360) % 360
+//            }
+//        }
+//        if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+//            mGeomagnetic[0] = alpha * mGeomagnetic[0] + (1 - alpha) * event.values[0]
+//            mGeomagnetic[1] = alpha * mGeomagnetic[1] + (1 - alpha) * event.values[1]
+//            mGeomagnetic[2] = alpha * mGeomagnetic[2] + (1 - alpha) * event.values[2]
+//
+//            val success = SensorManager.getRotationMatrix(arrR, arrI, mGravity, mGeomagnetic)
+//            if (success) {
+//                val orientation = FloatArray(3)
+//                SensorManager.getOrientation(arrR, orientation)
+//                azimuth = Math.toDegrees(orientation[0].toDouble()).toFloat() // orientation
+//                azimuth = (azimuth + azimuthFix + 360) % 360
+//            }
+//        }
+//    }
+//
+//    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+//        return
+//    }
 }
