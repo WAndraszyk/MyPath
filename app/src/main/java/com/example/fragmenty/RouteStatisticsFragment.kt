@@ -19,10 +19,10 @@ import java.sql.Time
 
 class RouteStatisticsFragment : Fragment() {
     val routes = mutableListOf<Route>()
-    private var record = Time(0,0,0)
-    private var recordDate = Date(0,0,0)
-    private var lastTime = Time(0,0,0)
-    private var lastTimeDate = Date(0,0,0)
+    private lateinit var record :Time
+    private lateinit var recordDate :Date
+    private lateinit var lastTime :Time
+    private lateinit var lastTimeDate :Date
     private var name = ""
     private var way = ""
     private var image = ""
@@ -69,9 +69,17 @@ class RouteStatisticsFragment : Fragment() {
         }
         title.text = name
         val textRecord = view.findViewById<TextView>(R.id.textRecord)
-        textRecord.text = "Record of the route: $record on $recordDate"
         val textLastTime = view.findViewById<TextView>(R.id.textLastTime)
-        textLastTime.text = "Most recent time: $lastTime on $lastTimeDate"
+        if (this::record.isInitialized) {
+            textRecord.text = "Record of the route: $record on $recordDate"
+        } else{
+            textRecord.text = "There are no records on this route. Set your first record!"
+        }
+        if (this::lastTime.isInitialized) {
+            textLastTime.text = "Most recent time: $lastTime on $lastTimeDate"
+        } else{
+            textLastTime.text = ""
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
