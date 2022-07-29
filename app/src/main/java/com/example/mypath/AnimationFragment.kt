@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator

@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
@@ -124,12 +124,12 @@ class StoperFragment : Fragment() {
         var error = ""
 
         private fun insert(time: Time, date: String) {
-            val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+            val sharedScore = activity?.getSharedPreferences("com.example.mypath.shared",0)
             val routeId = sharedScore?.getInt("route_id", -1)
             val user = sharedScore?.getString("username", "")
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 statement.executeUpdate("insert into routes_times values('$date', '$time', '$routeId', '$user');")

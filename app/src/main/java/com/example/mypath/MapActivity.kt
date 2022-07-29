@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.fragmenty
+package com.example.mypath
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -18,12 +18,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.example.fragmenty.databinding.ActivityMapBinding
+import com.example.mypath.databinding.ActivityMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
@@ -318,11 +317,11 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, SensorEventListener
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
-                val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
+                val sharedScore = getSharedPreferences("com.example.mypath.shared",0)
                 val routeId = sharedScore?.getInt("route_id", -1)
 
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from points where route_id = $routeId order by point_no;")

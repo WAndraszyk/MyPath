@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".StatisticsActivity">
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.fragmenty.RouteStatisticsFragment"
+        android:name="com.example.mypath.RouteStatisticsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/statistics_frag_container"/>

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Fragmenty" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.MyPath" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#4CAE50</item>
         <item name="colorPrimaryVariant">#6ECC72</item>

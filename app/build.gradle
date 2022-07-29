@@ -8,7 +8,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.fragmenty"
+        applicationId "com.example.mypath"
         minSdk 24
         targetSdk 32
         versionCode 1
@@ -30,7 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.example.fragmenty'
+    namespace 'com.example.mypath'
     buildFeatures {
         viewBinding true
     }

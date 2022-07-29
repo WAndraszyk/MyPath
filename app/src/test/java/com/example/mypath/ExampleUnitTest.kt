@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import org.junit.Test
 

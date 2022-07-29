@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -78,7 +78,7 @@ class Tab2Fragment : Fragment(R.layout.fragment_tab2) {
     }
 
     private fun setRoute(id: Int){
-        val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+        val sharedScore = activity?.getSharedPreferences("com.example.mypath.shared",0)
         val edit = sharedScore?.edit()
         edit?.putInt("id", id)
         edit?.apply()
@@ -92,7 +92,7 @@ class Tab2Fragment : Fragment(R.layout.fragment_tab2) {
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from routes where type = 'bicycle';")

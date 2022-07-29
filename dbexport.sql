@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `fragmenty` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `fragmenty`;
+CREATE DATABASE  IF NOT EXISTS `mypath` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `mypath`;
 -- MySQL dump 10.13  Distrib 5.5.16, for Win32 (x86)
 --
--- Host: localhost    Database: fragmenty
+-- Host: localhost    Database: mypath
 -- ------------------------------------------------------
 -- Server version	5.1.49-community
 

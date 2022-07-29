@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.view.LayoutInflater
 import android.view.View

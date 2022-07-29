@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         val nickField = findViewById<EditText>(R.id.nick)
         val passwordField = findViewById<EditText>(R.id.password)
 
-        val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
+        val sharedScore = getSharedPreferences("com.example.mypath.shared",0)
 
         loginButton.setOnClickListener {
             nick = nickField.text.toString()
@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from users where nick = '$nick' and password = '$password';")
@@ -144,7 +144,7 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 statement.executeUpdate("insert into users values('$nick', '$password');")
@@ -164,12 +164,12 @@ class LoginActivity : AppCompatActivity(), SensorEventListener {
 
         @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg p0: Void?): Void? {
-            val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
+            val sharedScore = getSharedPreferences("com.example.mypath.shared",0)
             val username = sharedScore.getString("username", "")
 
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
                 val resultSet = statement.executeQuery("select * from users where nick = '$username';")

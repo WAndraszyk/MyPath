@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -26,7 +26,7 @@ class DetailActivity : AppCompatActivity(), SensorEventListener {
     }
 
     private fun setRoute(id: Int){
-        val sharedScore = this.getSharedPreferences("com.example.fragmenty.shared",0)
+        val sharedScore = this.getSharedPreferences("com.example.mypath.shared",0)
         val edit = sharedScore?.edit()
         edit?.putInt("id", id)
         edit?.apply()

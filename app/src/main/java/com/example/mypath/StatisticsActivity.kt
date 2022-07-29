@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent

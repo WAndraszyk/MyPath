@@ -1,28 +1,27 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
+import android.graphics.drawable.ColorDrawable
 import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentTransaction
-import java.sql.Date
+import androidx.fragment.app.Fragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.sql.DriverManager
-import java.sql.Time
 
-class RouteStatisticsFragment : Fragment() {
+
+class RouteDetailFragment : Fragment() {
     val routes = mutableListOf<Route>()
-    private lateinit var record :Time
-    private lateinit var recordDate :Date
-    private lateinit var lastTime :Time
-    private lateinit var lastTimeDate :Date
     private var name = ""
     private var way = ""
     private var image = ""
@@ -30,22 +29,19 @@ class RouteStatisticsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState == null) {
-            val stoper = StoperFragment()
-            val ft = childFragmentManager.beginTransaction()
-            ft.add(R.id.stoper_container, stoper)
-            ft.addToBackStack(null)
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            ft.commit()
-        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_route_statistics, container, false)
+        val view = inflater.inflate(R.layout.fragment_route_detail, container, false)
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
+        val typedValue = TypedValue()
+        val theme: Resources.Theme? = activity?.theme
+        theme?.resolveAttribute(com.google.android.material.R.attr.colorPrimary, typedValue, true)
+        @ColorInt val color = typedValue.data
+        (activity as AppCompatActivity?)!!.supportActionBar?.setBackgroundDrawable(ColorDrawable(color))
 
         val logOut = view.findViewById<ImageView>(R.id.logOutIcon)
         logOut.setOnClickListener{
@@ -54,13 +50,27 @@ class RouteStatisticsFragment : Fragment() {
             startActivity(intent)
         }
 
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab)
+
+        fab.setOnClickListener(){
+            val intent = Intent(requireContext(), StatisticsActivity()::class.java)
+            startActivity(intent)
+        }
+
+        val map = view.findViewById<FloatingActionButton>(R.id.mapfab)
+
+        map.setOnClickListener(){
+            val intent = Intent(requireContext(), MapActivity()::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent)
+        }
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val imageView = view.findViewById<ImageView>(R.id.image)
         val title = view.findViewById<TextView>(R.id.textTitle)
+        val imageView = view.findViewById<ImageView>(R.id.image)
         val db = DBHelper()
         val exe = db.execute().get()
         val id = context?.resources?.getIdentifier("drawable/$image", null, context?.packageName)
@@ -68,18 +78,8 @@ class RouteStatisticsFragment : Fragment() {
             imageView.setImageResource(id)
         }
         title.text = name
-        val textRecord = view.findViewById<TextView>(R.id.textRecord)
-        val textLastTime = view.findViewById<TextView>(R.id.textLastTime)
-        if (this::record.isInitialized) {
-            textRecord.text = "Record of the route: $record on $recordDate"
-        } else{
-            textRecord.text = "There are no records on this route. Set your first record!"
-        }
-        if (this::lastTime.isInitialized) {
-            textLastTime.text = "Most recent time: $lastTime on $lastTimeDate"
-        } else{
-            textLastTime.text = ""
-        }
+        val description = view.findViewById<TextView>(R.id.textDescription)
+        description.text = way
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -90,10 +90,10 @@ class RouteStatisticsFragment : Fragment() {
         override fun doInBackground(vararg p0: Void?): Void? {
             try{
                 Class.forName("com.mysql.jdbc.Driver").newInstance()
-                val url= "jdbc:mysql://10.0.2.2:3306/fragmenty"
+                val url= "jdbc:mysql://10.0.2.2:3306/mypath"
                 val connection = DriverManager.getConnection(url, "root","haslo")
                 val statement = connection.createStatement()
-                var resultSet = statement.executeQuery("select * from routes order by type, name;")
+                val resultSet = statement.executeQuery("select * from routes order by type, name;")
                 while(resultSet.next()){
                     val route_id = resultSet.getInt(1)
                     val name = resultSet.getString(2)
@@ -103,9 +103,8 @@ class RouteStatisticsFragment : Fragment() {
                     routes.add(Route(route_id, name, way, image, type))
                 }
 
-                val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+                val sharedScore = activity?.getSharedPreferences("com.example.mypath.shared",0)
                 val routeId = sharedScore?.getInt("id", -1)
-                val user = sharedScore?.getString("username", "")
                 val route = routes[routeId!!]
                 route_id = route.getRouteId()
                 name = route.getName()
@@ -115,21 +114,6 @@ class RouteStatisticsFragment : Fragment() {
                 edit.putInt("route_id", route_id)
                 edit.putString("name", name)
                 edit.apply()
-
-                resultSet = statement.executeQuery("select date, score, route_id from routes_times \n" +
-                        "where score = (select min(score) from routes_times where route_id = '$route_id' and user = '$user')\n" +
-                        "and route_id = '$route_id' and user = '$user';")
-                while(resultSet.next()){
-                    recordDate = resultSet.getDate(1)
-                    record = resultSet.getTime(2)
-                }
-                resultSet = statement.executeQuery("select date, score, route_id from routes_times \n" +
-                        "where date = (select max(date) from routes_times where route_id = '$route_id' and user = '$user')\n" +
-                        "and route_id = '$route_id' and user = '$user';")
-                while(resultSet.next()){
-                    lastTimeDate = resultSet.getDate(1)
-                    lastTime = resultSet.getTime(2)
-                }
             }catch (e: Exception){
                 error = e.toString()
                 println("----------------DATABASE ERROR: $error--------------")

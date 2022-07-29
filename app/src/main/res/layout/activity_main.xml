@@ -10,7 +10,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/list_fragment"
-        android:name="com.example.fragmenty.RouteListFragment"
+        android:name="com.example.mypath.RouteListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"

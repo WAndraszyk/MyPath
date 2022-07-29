@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.Manifest
 import android.content.Context
@@ -48,7 +48,7 @@ class Tab1Fragment : Fragment(R.layout.fragment_tab1) {
         home = view.findViewById(R.id.Home)
 
         val welcome = view.findViewById<TextView>(R.id.welcome)
-        val sharedScore = activity?.getSharedPreferences("com.example.fragmenty.shared",0)
+        val sharedScore = activity?.getSharedPreferences("com.example.mypath.shared",0)
         val username = sharedScore?.getString("username", "")
         welcome.text = "Welcome $username!"
 

@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

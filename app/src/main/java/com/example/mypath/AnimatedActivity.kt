@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +36,7 @@ class AnimatedActivity : AppCompatActivity() {
     }
 
     private fun isLoggedIn() : Boolean{
-        val sharedScore = getSharedPreferences("com.example.fragmenty.shared",0)
+        val sharedScore = getSharedPreferences("com.example.mypath.shared",0)
         val user = sharedScore.getString("username","")
         return user != ""
     }

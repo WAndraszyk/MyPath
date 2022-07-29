@@ -1,4 +1,4 @@
-package com.example.fragmenty
+package com.example.mypath
 
 class Route (private val route_id: Int, private val name: String, private val way: String, private val image: String, private val type: String){
 

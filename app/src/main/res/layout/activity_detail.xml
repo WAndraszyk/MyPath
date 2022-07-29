@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.example.fragmenty.RouteDetailFragment"
+        android:name="com.example.mypath.RouteDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/detail_frag_container"/>
