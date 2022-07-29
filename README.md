@@ -1,4 +1,4 @@
-# Fragmenty
+# MyPath
 * aplikacja wykonana samodzielnie – 1 pkt ❌
 * czytelny i przyjazny interfejs - 1 pkt ✔
 * wykorzystanie własnej dedykowanej grafiki rastrowej i/lub wektorowej - 1 pkt ✔
