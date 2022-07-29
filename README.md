@@ -8,6 +8,8 @@
   - GPS ✔
   - zegar ✔
   - czujnik światła ✔
+  - magnetometr ✔
+  - akcelerometr ✔
 * wykorzystanie interfejsu komunikacyjnego smartfona (np. BT, NFC, 4G, WiFi, SMS) - 2 pkt ?
 * wykorzystanie zdalnej bazy danych – 2 pkt ✔
 * wykorzystanie lokalnej bazy danych – 1 pkt ❌
@@ -18,4 +20,4 @@ meteo, rozpoznawanie obrazów ...) – 2 pkt ✔
 * uwzględnienie aspektów energochłonności aplikacji (oszczędzanie energii) – 2 pkt
 * oryginalność pomysłu (brak podobnych aplikacji na rynku) – 3 pkt ❌
 
-So far: 11,5/11 pkt
+So far: 12,5/11 pkt
