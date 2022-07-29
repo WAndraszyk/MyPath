@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent)
+                this.finish()
             }
         }
     }

@@ -45,6 +45,7 @@ class RouteListFragment() : Fragment(R.layout.fragment_route_list) {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent)
+            activity?.finish()
         }
 
         return view
