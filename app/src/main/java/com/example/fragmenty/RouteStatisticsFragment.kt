@@ -108,16 +108,16 @@ class RouteStatisticsFragment : Fragment() {
                 edit.putString("name", name)
                 edit.apply()
 
-                resultSet = statement.executeQuery("select date, score, route from routes_times \n" +
-                        "where score = (select min(score) from routes_times where route = '$name' and user = '$user')\n" +
-                        "and route = '$name' and user = '$user';")
+                resultSet = statement.executeQuery("select date, score, route_id from routes_times \n" +
+                        "where score = (select min(score) from routes_times where route_id = '$route_id' and user = '$user')\n" +
+                        "and route_id = '$route_id' and user = '$user';")
                 while(resultSet.next()){
                     recordDate = resultSet.getDate(1)
                     record = resultSet.getTime(2)
                 }
-                resultSet = statement.executeQuery("select date, score, route from routes_times \n" +
-                        "where date = (select max(date) from routes_times where route = '$name' and user = '$user')\n" +
-                        "and route = '$name' and user = '$user';")
+                resultSet = statement.executeQuery("select date, score, route_id from routes_times \n" +
+                        "where date = (select max(date) from routes_times where route_id = '$route_id' and user = '$user')\n" +
+                        "and route_id = '$route_id' and user = '$user';")
                 while(resultSet.next()){
                     lastTimeDate = resultSet.getDate(1)
                     lastTime = resultSet.getTime(2)
